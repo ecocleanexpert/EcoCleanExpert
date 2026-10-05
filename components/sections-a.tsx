@@ -11,7 +11,7 @@ export function Services({ content }: { content: SiteContent }) {
   const iconMap: Record<string, (c?: string) => JSX.Element> = { sofa: I.sofa, chair: I.chair, carpet: I.carpet, car: I.car, building: I.building, hammer: I.hammer };
   const items = content.services.filter((s) => s.active).sort((a, b) => a.order - b.order);
   return (
-    <section id="services" className="py-16 lg:py-24 bg-slate-50/70">
+    <section id="services" className="py-10 lg:py-14 bg-slate-50/70">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
         <Reveal>
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5 mb-10 lg:mb-14">
