@@ -94,9 +94,9 @@ export function AdminTestimonials({ content, setContent, media, onToast }: { con
                   <div className="text-[13px] text-slate-500 truncate">"{t.text}"</div>
                 </div>
                 <div className="flex items-center gap-1 shrink-0">
-                  <button onClick={() => toggle(t.id)} className="w-8 h-8 rounded-lg hover:bg-slate-100 text-slate-500 flex items-center justify-center">{t.active !== false ? I.eye("w-4 h-4") : I.eye_off("w-4 h-4")}</button>
-                  <button onClick={() => openEdit(t)} className="w-8 h-8 rounded-lg hover:bg-slate-100 text-slate-500 flex items-center justify-center">{I.pencil("w-4 h-4")}</button>
-                  <button onClick={() => setConfirmDel(t)} className="w-8 h-8 rounded-lg hover:bg-red-50 text-red-500 flex items-center justify-center">{I.trash("w-4 h-4")}</button>
+                  <button aria-label={t.active !== false ? "Désactiver" : "Activer"} onClick={() => toggle(t.id)} className="w-8 h-8 rounded-lg hover:bg-slate-100 text-slate-500 flex items-center justify-center">{t.active !== false ? I.eye("w-4 h-4") : I.eye_off("w-4 h-4")}</button>
+                  <button aria-label="Modifier" onClick={() => openEdit(t)} className="w-8 h-8 rounded-lg hover:bg-slate-100 text-slate-500 flex items-center justify-center">{I.pencil("w-4 h-4")}</button>
+                  <button aria-label="Supprimer" onClick={() => setConfirmDel(t)} className="w-8 h-8 rounded-lg hover:bg-red-50 text-red-500 flex items-center justify-center">{I.trash("w-4 h-4")}</button>
                 </div>
               </div>
             ))}

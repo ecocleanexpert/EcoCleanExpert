@@ -80,7 +80,7 @@ export function MediaPicker({ open, onClose, media, onPick }: { open: boolean; o
       <div className="relative bg-white rounded-2xl ring-1 ring-slate-900/5 shadow-2xl w-full max-w-3xl max-h-[80vh] flex flex-col overflow-hidden">
         <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
           <h3 className="text-[16px] font-bold text-slate-900">Choisir une image</h3>
-          <button onClick={onClose} className="w-9 h-9 rounded-lg hover:bg-slate-100 flex items-center justify-center text-slate-500">{I.x("w-5 h-5")}</button>
+          <button aria-label="Fermer" onClick={onClose} className="w-9 h-9 rounded-lg hover:bg-slate-100 flex items-center justify-center text-slate-500">{I.x("w-5 h-5")}</button>
         </div>
         <div className="p-6 overflow-y-auto">
           {media.length === 0 ? (

@@ -60,9 +60,9 @@ export function AdminZones({ content, setContent, onToast }: { content: SiteCont
                 </div>
               </div>
               <div className="flex items-center gap-1 shrink-0">
-                <button onClick={() => toggle(z.id)} className="w-8 h-8 rounded-lg hover:bg-slate-100 text-slate-500 flex items-center justify-center">{z.active ? I.eye("w-4 h-4") : I.eye_off("w-4 h-4")}</button>
-                <button onClick={() => { setDraftName(z.name); setEditing(z.id); }} className="w-8 h-8 rounded-lg hover:bg-slate-100 text-slate-500 flex items-center justify-center">{I.pencil("w-4 h-4")}</button>
-                <button onClick={() => setConfirmDel(z)} className="w-8 h-8 rounded-lg hover:bg-red-50 text-red-500 flex items-center justify-center">{I.trash("w-4 h-4")}</button>
+                <button aria-label={z.active ? "Désactiver" : "Activer"} onClick={() => toggle(z.id)} className="w-8 h-8 rounded-lg hover:bg-slate-100 text-slate-500 flex items-center justify-center">{z.active ? I.eye("w-4 h-4") : I.eye_off("w-4 h-4")}</button>
+                <button aria-label="Modifier" onClick={() => { setDraftName(z.name); setEditing(z.id); }} className="w-8 h-8 rounded-lg hover:bg-slate-100 text-slate-500 flex items-center justify-center">{I.pencil("w-4 h-4")}</button>
+                <button aria-label="Supprimer" onClick={() => setConfirmDel(z)} className="w-8 h-8 rounded-lg hover:bg-red-50 text-red-500 flex items-center justify-center">{I.trash("w-4 h-4")}</button>
               </div>
             </div>
           ))}

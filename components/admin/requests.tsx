@@ -185,7 +185,7 @@ export function AdminRequests({ requests, setRequests, onToast }: { requests: Qu
                   {new Date(selected.date).toLocaleString("fr-FR", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" })}
                 </p>
               </div>
-              <button onClick={() => setSelected(null)} className="w-9 h-9 rounded-lg hover:bg-slate-100 flex items-center justify-center text-slate-500 shrink-0">
+              <button aria-label="Fermer" onClick={() => setSelected(null)} className="w-9 h-9 rounded-lg hover:bg-slate-100 flex items-center justify-center text-slate-500 shrink-0">
                 {I.x("w-5 h-5")}
               </button>
             </div>

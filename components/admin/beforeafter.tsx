@@ -76,9 +76,9 @@ export function AdminBeforeAfter({ content, setContent, media, onToast }: { cont
                 <div className="text-[13px] text-slate-500 truncate">{b.desc}</div>
               </div>
               <div className="flex items-center gap-1 shrink-0">
-                <button onClick={() => toggle(b.id)} className="w-8 h-8 rounded-lg hover:bg-slate-100 text-slate-500 flex items-center justify-center">{b.active ? I.eye("w-4 h-4") : I.eye_off("w-4 h-4")}</button>
-                <button onClick={() => openEdit(b)} className="w-8 h-8 rounded-lg hover:bg-slate-100 text-slate-500 flex items-center justify-center">{I.pencil("w-4 h-4")}</button>
-                <button onClick={() => setConfirmDel(b)} className="w-8 h-8 rounded-lg hover:bg-red-50 text-red-500 flex items-center justify-center">{I.trash("w-4 h-4")}</button>
+                <button aria-label={b.active ? "Désactiver" : "Activer"} onClick={() => toggle(b.id)} className="w-8 h-8 rounded-lg hover:bg-slate-100 text-slate-500 flex items-center justify-center">{b.active ? I.eye("w-4 h-4") : I.eye_off("w-4 h-4")}</button>
+                <button aria-label="Modifier" onClick={() => openEdit(b)} className="w-8 h-8 rounded-lg hover:bg-slate-100 text-slate-500 flex items-center justify-center">{I.pencil("w-4 h-4")}</button>
+                <button aria-label="Supprimer" onClick={() => setConfirmDel(b)} className="w-8 h-8 rounded-lg hover:bg-red-50 text-red-500 flex items-center justify-center">{I.trash("w-4 h-4")}</button>
               </div>
             </div>
           ))}
