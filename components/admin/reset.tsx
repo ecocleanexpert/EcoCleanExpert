@@ -28,8 +28,19 @@ export function AdminReset({ content, onDone }: { content: SiteContent; onDone: 
     });
 
     const init = async () => {
-      // Lien Supabase : soit ?code= (PKCE) soit #access_token= (implicit, détecté automatiquement)
-      const code = new URLSearchParams(window.location.search).get("code");
+      const params = new URLSearchParams(window.location.search);
+      // Lien email : ?token_hash=xxx&type=recovery|invite (vérification directe, pas de verifier PKCE requis)
+      const tokenHash = params.get("token_hash");
+      const type = params.get("type");
+      if (tokenHash && (type === "recovery" || type === "invite")) {
+        const { error } = await sb.auth.verifyOtp({ type: type as "recovery" | "invite", token_hash: tokenHash });
+        if (!error) { markReady(); return; }
+        if (ready) return;
+        setSessionReady(false);
+        return;
+      }
+      // Fallback : ?code= (PKCE) ou #access_token= (implicit, détecté automatiquement)
+      const code = params.get("code");
       if (code) {
         const { error } = await sb.auth.exchangeCodeForSession(code);
         if (!error) { markReady(); return; }
