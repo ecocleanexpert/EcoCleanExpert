@@ -17,6 +17,8 @@ import { AdminTestimonials } from "@/components/admin/testimonials";
 import { AdminZones } from "@/components/admin/zones";
 import { AdminContent } from "@/components/admin/content";
 import { AdminMedia } from "@/components/admin/media";
+import { AdminAccounts } from "@/components/admin/accounts";
+import { getMyEmail, getMyRole, ROLE_LABELS, ROLE_TABS, type AdminRole } from "@/lib/roles";
 import type { MediaItem, QuoteRequest, SetContent, SetMedia, SetRequests } from "@/lib/types";
 import type { SiteContent } from "@/lib/defaultContent";
 
@@ -32,6 +34,7 @@ export const ADMIN_NAV = [
   { key: "zones", label: "Zones", icon: I.pin },
   { key: "content", label: "Contenu du site", icon: I.file },
   { key: "media", label: "Médiathèque", icon: I.image },
+  { key: "accounts", label: "Comptes", icon: I.users },
 ];
 
 export function StatCard({ icon, label, value, hint }: { icon: ReactNode; label: string; value: ReactNode; hint?: ReactNode }) {
@@ -53,6 +56,16 @@ export function AdminShell({ content, setContent, media, setMedia, requests, set
   const [toast, setToast] = useState<any>(null);
   const [query, setQuery] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
+  const [role, setRole] = useState<AdminRole>("super_admin");
+  const [myEmail, setMyEmail] = useState("");
+
+  useEffect(() => {
+    getMyRole().then(setRole);
+    getMyEmail().then(setMyEmail);
+  }, []);
+
+  const allowedTabs = ROLE_TABS[role];
+  const visibleNav = ADMIN_NAV.filter((n) => allowedTabs.includes(n.key));
 
   const onToast = (msg: any, type = "success") => setToast({ msg, type });
 
@@ -183,6 +196,7 @@ case "legal": return <AdminLegal content={content} setContent={setContentUndoabl
       case "zones": return <AdminZones content={content} setContent={setContentUndoable} onToast={onToast} />;
       case "content": return <AdminContent content={content} setContent={setContentUndoable} media={media} onToast={onToast} />;
       case "media": return <AdminMedia media={media} setMedia={setMedia} onToast={onToast} />;
+      case "accounts": return role === "super_admin" ? <AdminAccounts onToast={onToast} /> : null;
       default: return null;
     }
   };
@@ -194,7 +208,7 @@ case "legal": return <AdminLegal content={content} setContent={setContentUndoabl
           <LogoBlock content={content} variant="sidebar" />
         </div>
         <nav className="flex-1 overflow-y-auto py-4 px-3">
-          {ADMIN_NAV.map((n) => {
+          {visibleNav.map((n) => {
             const active = tab === n.key;
             return (
               <button key={n.key} onClick={() => { setTab(n.key); setSidebarOpen(false); }} className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] font-medium transition-colors mb-1 ${active ? "bg-white/10 text-white" : "hover:bg-white/5 text-white/60"}`}>
@@ -272,10 +286,10 @@ case "legal": return <AdminLegal content={content} setContent={setContentUndoabl
               {I.globe("w-4 h-4")}
             </a>
             <div className="flex items-center gap-2.5 pl-2">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#1E9BE0] to-[#5CC63D] text-white text-[12px] font-bold flex items-center justify-center">A</div>
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#1E9BE0] to-[#5CC63D] text-white text-[12px] font-bold flex items-center justify-center">{(myEmail[0] || "A").toUpperCase()}</div>
               <div className="hidden sm:block leading-tight">
-                <div className="text-[13px] font-semibold text-slate-900">Admin</div>
-                <div className="text-[11px] text-slate-400">Super administrateur</div>
+                <div className="text-[13px] font-semibold text-slate-900">{myEmail || "Admin"}</div>
+                <div className="text-[11px] text-slate-400">{ROLE_LABELS[role]}</div>
               </div>
             </div>
           </div>
