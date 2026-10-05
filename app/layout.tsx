@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     description:
       "Nettoyage canapé, fauteuil, tapis, moquette et véhicules à Abidjan. Intervention à domicile. À partir de 15 000 F CFA.",
     url: SITE_URL,
-    images: ["/images/hero.jpg"],
+    images: ["/images/hero.webp"],
   },
   twitter: { card: "summary_large_image" },
 };
@@ -37,7 +37,7 @@ const localBusinessJsonLd = {
   "@type": "LocalBusiness",
   "@id": SITE_URL,
   name: "Eco Clean Expert",
-  image: `${SITE_URL}/images/hero.jpg`,
+  image: `${SITE_URL}/images/hero.webp`,
   url: SITE_URL,
   telephone: "+2250142089776",
   priceRange: "À partir de 15 000 F CFA",

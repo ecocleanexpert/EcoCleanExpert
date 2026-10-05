@@ -44,7 +44,7 @@ export default async function ServicePage({ params }: { params: Params }) {
   const service = findService(params.slug, content.services);
   if (!service || !service.active) notFound();
 
-  const img = service.image?.replace(/^\//, "") || "images/hero.jpg";
+  const img = service.image?.replace(/^\//, "") || "images/hero.webp";
   const wa = waLink(`Bonjour, je souhaite un devis pour : ${service.title}.`);
 
   const jsonLd = {
