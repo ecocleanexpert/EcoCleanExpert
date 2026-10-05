@@ -67,6 +67,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={inter.className}>
+        <link rel="preconnect" href="https://gdertkcsaenaqoxdhhzx.supabase.co" />
         <link rel="preload" as="image" href="/images/logo.png" fetchPriority="high" />
         <link rel="preload" as="image" href="/images/hero.webp" fetchPriority="high" />
         <script

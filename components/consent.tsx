@@ -35,7 +35,7 @@ export function ConsentBanner() {
         <p className="text-[13.5px] text-slate-600 leading-relaxed">
           Nous utilisons des cookies pour mesurer l&apos;audience du site et
           améliorer votre expérience. Consultez notre{" "}
-          <Link href="/politique-confidentialite" className="text-[#1E9BE0] font-semibold hover:underline">
+          <Link href="/politique-confidentialite" className="text-[#1173A9] font-semibold hover:underline">
             politique de confidentialité
           </Link>
           .

@@ -33,7 +33,7 @@ export function Pricing({ content }: { content: SiteContent }) {
             })}
             <div className="px-6 py-5 bg-slate-50/70 flex flex-col sm:flex-row items-center justify-between gap-3">
               <span className="text-[13px] text-slate-600">Un besoin spécifique ? Nous établissons un devis personnalisé.</span>
-              <a href={waLink()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#5CC63D] hover:bg-[#4CAF50] text-white text-[14px] font-semibold px-5 py-3 rounded-full transition-colors">{I.wa("w-4 h-4")} Demander un devis</a>
+              <a href={waLink()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#2E7D22] hover:bg-[#25681A] text-white text-[14px] font-semibold px-5 py-3 rounded-full transition-colors">{I.wa("w-4 h-4")} Demander un devis</a>
             </div>
           </div>
         </Reveal>
@@ -114,7 +114,7 @@ export function Zones({ content }: { content: SiteContent }) {
                 <span className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#1E9BE0]/10 text-[13.5px] font-semibold text-[#1E9BE0]">+ et autres communes</span>
               </div>
             </Reveal>
-            <Reveal delay={200}><a href={waLink("Bonjour, intervenez-vous dans ma commune à Abidjan ?")} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-2 bg-[#5CC63D] hover:bg-[#4CAF50] text-white font-semibold px-6 py-3.5 rounded-full transition-colors">{I.wa("w-5 h-5")} Vérifier ma commune</a></Reveal>
+            <Reveal delay={200}><a href={waLink("Bonjour, intervenez-vous dans ma commune à Abidjan ?")} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-2 bg-[#2E7D22] hover:bg-[#25681A] text-white font-semibold px-6 py-3.5 rounded-full transition-colors">{I.wa("w-5 h-5")} Vérifier ma commune</a></Reveal>
           </div>
           <Reveal delay={100}>
             <div className="relative rounded-3xl overflow-hidden ring-1 ring-slate-900/5 shadow-[0_24px_60px_-30px_rgba(15,23,42,0.35)]">
@@ -152,7 +152,7 @@ export function FinalCTA({ content }: { content: SiteContent }) {
     href={waLink()}
     target="_blank"
     rel="noopener noreferrer"
-    className="inline-flex items-center justify-center gap-2.5 bg-[#5CC63D] hover:bg-[#4CAF50] text-white font-semibold px-7 py-4 rounded-full transition-all shadow-[0_14px_40px_-12px_rgba(92,198,61,0.7)]"
+    className="inline-flex items-center justify-center gap-2.5 bg-[#2E7D22] hover:bg-[#25681A] text-white font-semibold px-7 py-4 rounded-full transition-all shadow-[0_14px_40px_-12px_rgba(92,198,61,0.7)]"
   >
     {I.wa("w-5 h-5")} {content.cta.button}
   </a>

@@ -150,7 +150,7 @@ export function FAQSection({ content }: { content: SiteContent }) {
                   href={waLink("Bonjour Eco Clean Expert, j'ai une question à propos de vos services.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-6 inline-flex items-center gap-2.5 bg-[#5CC63D] hover:bg-[#4CAF50] text-white font-semibold px-7 py-3.5 rounded-full transition-all shadow-[0_14px_40px_-12px_rgba(92,198,61,0.7)]"
+                  className="mt-6 inline-flex items-center gap-2.5 bg-[#2E7D22] hover:bg-[#25681A] text-white font-semibold px-7 py-3.5 rounded-full transition-all shadow-[0_14px_40px_-12px_rgba(92,198,61,0.7)]"
                 >
                   {I.wa("w-5 h-5")} {faq.ctaButton || "Poser ma question"}
                 </a>

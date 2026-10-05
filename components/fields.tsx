@@ -122,7 +122,7 @@ export function ImageField({ value, onChange, label, hint, onOpenLibrary, aspect
 export function Btn({ variant = "primary", size = "md", icon, children, ...rest }: BtnProps) {
   const variants = {
     primary: "bg-[#0A2A6B] hover:bg-[#071B4C] text-white",
-    green: "bg-[#5CC63D] hover:bg-[#4CAF50] text-white",
+    green: "bg-[#2E7D22] hover:bg-[#25681A] text-white",
     ghost: "bg-slate-100 hover:bg-slate-200 text-slate-700",
     danger: "bg-red-50 hover:bg-red-100 text-red-600",
     outline: "bg-white border border-slate-200 hover:border-slate-300 text-slate-700",

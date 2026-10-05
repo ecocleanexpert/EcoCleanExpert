@@ -69,7 +69,7 @@ export function LegalPage({ content, type, onBack }: { content: SiteContent; typ
             </a>
             <a
               href={`tel:${(company.phone || content.contact.phone).replace(/\s/g, "")}`}
-              className="inline-flex items-center gap-2 bg-[#5CC63D] hover:bg-[#4CAF50] text-white font-semibold px-5 py-3 rounded-xl transition-colors text-[13.5px]"
+              className="inline-flex items-center gap-2 bg-[#2E7D22] hover:bg-[#25681A] text-white font-semibold px-5 py-3 rounded-xl transition-colors text-[13.5px]"
             >
               {I.phone("w-4 h-4")} {company.phone || content.contact.phone}
             </a>

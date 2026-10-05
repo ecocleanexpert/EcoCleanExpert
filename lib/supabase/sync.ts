@@ -46,9 +46,14 @@ export async function fetchSiteData(): Promise<{
   };
 }
 
+async function hasAuthSession(sb: NonNullable<ReturnType<typeof getSupabase>>) {
+  const { data } = await sb.auth.getSession();
+  return !!data.session;
+}
+
 export async function persistContent(doc: SiteContent) {
   const sb = getSupabase();
-  if (!sb) return;
+  if (!sb || !(await hasAuthSession(sb))) return;
   const { error } = await sb
     .from("site_content")
     .upsert({ id: 1, doc, updated_at: new Date().toISOString() });
@@ -67,7 +72,7 @@ export async function syncMedia(
   knownIds: Set<number>
 ): Promise<MediaItem[]> {
   const sb = getSupabase();
-  if (!sb) return items;
+  if (!sb || !(await hasAuthSession(sb))) return items;
 
   const result: MediaItem[] = [];
   for (const m of items) {
@@ -116,7 +121,7 @@ export async function syncRequests(
   knownIds: Set<number>
 ): Promise<void> {
   const sb = getSupabase();
-  if (!sb) return;
+  if (!sb || !(await hasAuthSession(sb))) return;
 
   for (const r of items) {
     if (!knownIds.has(r.id)) {

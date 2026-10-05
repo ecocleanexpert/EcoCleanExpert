@@ -137,7 +137,7 @@ export function ContactFormSection({ content, onNewRequest }: { content: SiteCon
                 {cf.successText || "Nous vous répondons en moins d'une heure sur WhatsApp."}
               </p>
               <div className="mt-7 flex flex-col sm:flex-row gap-3 justify-center">
-                <a href={waLink()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2.5 bg-[#5CC63D] hover:bg-[#4CAF50] text-white font-semibold px-6 py-3.5 rounded-full transition-colors">
+                <a href={waLink()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2.5 bg-[#2E7D22] hover:bg-[#25681A] text-white font-semibold px-6 py-3.5 rounded-full transition-colors">
                   {I.wa("w-5 h-5")} Ouvrir WhatsApp
                 </a>
                 <a href={`tel:${content.contact.phone.replace(/\s/g, "")}`} className="inline-flex items-center justify-center gap-2.5 bg-white border border-slate-200 hover:border-slate-300 text-slate-800 font-semibold px-6 py-3.5 rounded-full transition-colors">

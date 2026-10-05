@@ -235,7 +235,7 @@ export function AdminRequests({ requests, setRequests, onToast }: { requests: Qu
               </div>
 
               <div className="flex flex-wrap gap-2 pt-2">
-                <a href={waLink(`Bonjour ${selected.name}, je vous recontacte concernant votre demande de ${selected.service} à ${selected.commune}.`)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#5CC63D] hover:bg-[#4CAF50] text-white text-[13px] font-semibold px-4 py-2.5 rounded-xl transition-colors">
+                <a href={waLink(`Bonjour ${selected.name}, je vous recontacte concernant votre demande de ${selected.service} à ${selected.commune}.`)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#2E7D22] hover:bg-[#25681A] text-white text-[13px] font-semibold px-4 py-2.5 rounded-xl transition-colors">
                   {I.wa("w-4 h-4")} Répondre sur WhatsApp
                 </a>
                 <a href={`tel:${selected.phone.replace(/\s/g, "")}`} className="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-[13px] font-semibold px-4 py-2.5 rounded-xl transition-colors">

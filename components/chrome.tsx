@@ -56,7 +56,7 @@ export function MobileBar({ content }: { content: SiteContent }) {
             href={waLink()}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 bg-[#5CC63D] hover:bg-[#4CAF50] text-white font-semibold py-3 rounded-xl transition-colors text-[13.5px] shadow-sm"
+            className="inline-flex items-center justify-center gap-2 bg-[#2E7D22] hover:bg-[#25681A] text-white font-semibold py-3 rounded-xl transition-colors text-[13.5px] shadow-sm"
           >
             {I.wa("w-4 h-4")} WhatsApp
           </a>
@@ -103,7 +103,7 @@ export function Header({ content, onAdmin }: { content: SiteContent; onAdmin: ()
     href={waLink()}
     target="_blank"
     rel="noopener noreferrer"
-    className="inline-flex items-center gap-2 bg-[#5CC63D] hover:bg-[#4CAF50] text-white text-[14px] font-semibold px-5 py-2.5 rounded-full transition-colors shadow-sm"
+    className="inline-flex items-center gap-2 bg-[#2E7D22] hover:bg-[#25681A] text-white text-[14px] font-semibold px-5 py-2.5 rounded-full transition-colors shadow-sm"
   >
     {I.wa("w-4 h-4")} Devis WhatsApp
   </a>
@@ -171,7 +171,7 @@ export function Footer({ content, onAdmin, onNavigate }: { content: SiteContent;
               <li className="inline-flex items-center gap-2.5"><span className="text-[#5CC63D]">{I.pin("w-4 h-4")}</span> {content.contact.city}</li>
               <li className="inline-flex items-center gap-2.5"><span className="text-[#5CC63D]">{I.clock("w-4 h-4")}</span> {content.contact.hours}</li>
             </ul>
-                        <a href={waLink()} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center gap-2 bg-[#5CC63D] hover:bg-[#4CAF50] text-white text-[13.5px] font-semibold px-4 py-2.5 rounded-full transition-colors">{I.wa("w-4 h-4")} WhatsApp</a>
+                        <a href={waLink()} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center gap-2 bg-[#2E7D22] hover:bg-[#25681A] text-white text-[13.5px] font-semibold px-4 py-2.5 rounded-full transition-colors">{I.wa("w-4 h-4")} WhatsApp</a>
             {/* Mention groupe parent */}
             {content.parentCompany?.showInFooter !== false && content.parentCompany?.name && (
               <div className="mt-6 pt-6 border-t border-white/10">

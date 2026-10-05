@@ -37,7 +37,7 @@ export function SiteHome() {
       <a
         href={`tel:${content.contact.phone.replace(/\s/g, "")}`}
         title={`Appeler ${content.contact.phone}`}
-        className="hidden lg:flex fixed bottom-5 left-5 z-40 w-12 h-12 rounded-full bg-[#5CC63D] hover:bg-[#4CAF50] text-white shadow-lg items-center justify-center transition-colors"
+        className="hidden lg:flex fixed bottom-5 left-5 z-40 w-12 h-12 rounded-full bg-[#2E7D22] hover:bg-[#25681A] text-white shadow-lg items-center justify-center transition-colors"
         aria-label="Appeler"
       >
         {I.phone("w-5 h-5")}
