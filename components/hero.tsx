@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { I } from "@/lib/icons";
 import { waLink } from "@/lib/constants";
-import { Img, Reveal } from "@/components/ui";
+import { Img } from "@/components/ui";
 import type { SiteContent } from "@/lib/defaultContent";
 
 export function TypewriterHero({ phrases, settings }: { phrases: { line1: string; line2: string }[]; settings?: SiteContent["hero"]["typewriter"] }) {
@@ -105,8 +105,7 @@ export function Hero({ content }: { content: SiteContent }) {
       {/* Contenu — panneau blanc transparent */}
       <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-24 lg:py-28">
         <div className="lg:max-w-[580px]">
-          <Reveal>
-            <div className="bg-white/40 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-[0_24px_70px_-24px_rgba(15,23,42,0.35)] ring-1 ring-white/60">
+            <div className="bg-white/40 backdrop-blur-md backdrop-saturate-150 rounded-3xl p-6 sm:p-8 shadow-[0_24px_70px_-24px_rgba(15,23,42,0.35)] ring-1 ring-white/60">
 
               {/* Label */}
               <div className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.18em] text-[#1E9BE0] uppercase">
@@ -175,7 +174,6 @@ export function Hero({ content }: { content: SiteContent }) {
               </div>
 
             </div>
-          </Reveal>
         </div>
       </div>
     </section>

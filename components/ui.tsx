@@ -16,25 +16,35 @@ export function Img({ src, alt, className = "", ...rest }: ImgProps) {
   return <img src={src} alt={alt} loading={rest.loading ?? "lazy"} decoding="async" className={className} onError={() => setErr(true)} {...rest} />;
 }
 
-export function useReveal(threshold = 0.15): [RefObject<any>, boolean] {
+export function useReveal(threshold = 0.15): [RefObject<any>, boolean, boolean] {
   const ref = useRef<any>(null);
   const [shown, setShown] = useState(false);
+  const [instant, setInstant] = useState(false);
   useEffect(() => {
     const el = ref.current; if (!el) return;
-    if (typeof IntersectionObserver === "undefined") { setShown(true); return; }
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setShown(true); obs.disconnect(); } }, { threshold });
+    const rect = el.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const isVisibleNow = rect.top < vh * 0.85 && rect.bottom > 0;
+    if (isVisibleNow || typeof IntersectionObserver === "undefined") {
+      setInstant(true); setShown(true); return;
+    }
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setShown(true); obs.disconnect(); } }, { threshold, rootMargin: "0px 0px -40px 0px" });
     obs.observe(el); return () => obs.disconnect();
   }, [threshold]);
-  return [ref, shown];
+  return [ref, shown, instant];
 }
 
 export function Reveal({ children, delay = 0, className = "" }: { children: ReactNode; delay?: number; className?: string }) {
-  const [ref, shown] = useReveal();
+  const [ref, shown, instant] = useReveal();
+  const transition = instant
+    ? "none"
+    : `opacity .7s cubic-bezier(.2,.7,.2,1) ${delay}ms, transform .7s cubic-bezier(.2,.7,.2,1) ${delay}ms`;
   return (
     <div ref={ref} className={className} style={{
       opacity: shown ? 1 : 0,
       transform: shown ? "translateY(0)" : "translateY(22px)",
-      transition: `opacity .7s cubic-bezier(.2,.7,.2,1) ${delay}ms, transform .7s cubic-bezier(.2,.7,.2,1) ${delay}ms`,
+      transition,
+      willChange: shown && !instant ? "auto" : "opacity, transform",
     }}>{children}</div>
   );
 }
