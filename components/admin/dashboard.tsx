@@ -1,11 +1,30 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { I } from "@/lib/icons";
 import { StatCard } from "@/components/admin/shell";
+import { getActivity, type ActivityEntry } from "@/lib/activity";
 import type { MediaItem, QuoteRequest } from "@/lib/types";
 import type { SiteContent } from "@/lib/defaultContent";
 
+function formatAgo(iso: string) {
+  try {
+    const diff = (Date.now() - new Date(iso).getTime()) / 1000;
+    if (diff < 60) return "À l'instant";
+    if (diff < 3600) return `Il y a ${Math.floor(diff / 60)} min`;
+    if (diff < 86400) return `Il y a ${Math.floor(diff / 3600)} h`;
+    return `Il y a ${Math.floor(diff / 86400)} j`;
+  } catch { return ""; }
+}
+
 export function AdminDashboard({ content, media, requests, onNav }: { content: SiteContent; media: MediaItem[]; requests: QuoteRequest[]; onNav: (tab: string) => void }) {
+  const [activity, setActivity] = useState<ActivityEntry[]>([]);
+  useEffect(() => {
+    const sync = () => setActivity(getActivity());
+    sync();
+    window.addEventListener("ece-activity", sync);
+    return () => window.removeEventListener("ece-activity", sync);
+  }, []);
   const statsCount = (content.stats?.items || []).length;
   return (
     <div className="space-y-6">
@@ -53,6 +72,24 @@ export function AdminDashboard({ content, media, requests, onNav }: { content: S
           </div>
           <button onClick={() => onNav("media")} className="mt-4 text-[13px] font-semibold text-[#1E9BE0] hover:underline">Gérer la médiathèque →</button>
         </div>
+      </div>
+      <div className="bg-white rounded-2xl ring-1 ring-slate-900/5 p-6">
+        <h2 className="text-[15px] font-bold text-slate-900">Activité récente</h2>
+        {activity.length === 0 ? (
+          <p className="mt-3 text-[13px] text-slate-400">Aucune activité enregistrée pour le moment.</p>
+        ) : (
+          <ul className="mt-3 divide-y divide-slate-50">
+            {activity.slice(0, 10).map((a) => (
+              <li key={a.id} className="py-2.5 flex items-center justify-between gap-4">
+                <span className="text-[13.5px] text-slate-700">
+                  {a.action}
+                  {a.detail && <span className="text-slate-400"> — {a.detail}</span>}
+                </span>
+                <span className="text-[11.5px] text-slate-400 shrink-0">{formatAgo(a.date)}</span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

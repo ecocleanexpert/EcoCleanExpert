@@ -4,6 +4,7 @@ import { useState } from "react";
 import { I } from "@/lib/icons";
 import { waLink } from "@/lib/constants";
 import { Btn, Confirm } from "@/components/fields";
+import { logActivity } from "@/lib/activity";
 import type { QuoteRequest, SetRequests, ToastFn } from "@/lib/types";
 
 export function AdminRequests({ requests, setRequests, onToast }: { requests: QuoteRequest[]; setRequests: SetRequests; onToast: ToastFn }) {
@@ -30,11 +31,13 @@ export function AdminRequests({ requests, setRequests, onToast }: { requests: Qu
 
   const updateStatus = (id: any, status: any) => {
     setRequests((rs) => rs.map((r) => (r.id === id ? { ...r, status } : r)));
+    logActivity("Statut mis à jour", status);
     onToast("Statut mis à jour");
   };
 
   const remove = (id: any) => {
     setRequests((rs) => rs.filter((r) => r.id !== id));
+    logActivity("Demande supprimée", `#${id}`);
     onToast("Demande supprimée");
     setConfirmDel(null);
     if (selected?.id === id) setSelected(null);
@@ -75,6 +78,7 @@ export function AdminRequests({ requests, setRequests, onToast }: { requests: Qu
     a.download = `demandes-${new Date().toISOString().slice(0, 10)}.csv`;
     a.click();
     URL.revokeObjectURL(a.href);
+    logActivity("Export CSV", `${filtered.length} demande(s)`);
     onToast(`${filtered.length} demande(s) exportée(s)`);
   };
 
