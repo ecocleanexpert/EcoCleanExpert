@@ -28,8 +28,9 @@ export async function updateSession(request: NextRequest) {
 
   const isAdminArea = request.nextUrl.pathname.startsWith("/admin");
   const isLoginPage = request.nextUrl.pathname === "/admin/login";
+  const isResetPage = request.nextUrl.pathname === "/admin/reset";
 
-  if (isAdminArea && !isLoginPage && !user) {
+  if (isAdminArea && !isLoginPage && !isResetPage && !user) {
     const redirect = request.nextUrl.clone();
     redirect.pathname = "/admin/login";
     return NextResponse.redirect(redirect);

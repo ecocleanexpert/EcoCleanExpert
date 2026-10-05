@@ -10,8 +10,20 @@ export function AdminLogin({ onLogin, onBack, content }: { onLogin: (a: { email:
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [err, setErr] = useState("");
+  const [info, setInfo] = useState("");
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const forgot = async () => {
+    if (!isSupabaseConfigured) { setErr("Réinitialisation indisponible en mode démo."); return; }
+    if (!email.trim()) { setErr("Renseignez votre e-mail puis cliquez ici."); return; }
+    setErr("");
+    const { error } = await getSupabase()!.auth.resetPasswordForEmail(email.trim(), {
+      redirectTo: `${window.location.origin}/admin/reset`,
+    });
+    if (error) setErr("Envoi impossible. Vérifiez l'adresse.");
+    else setInfo("Lien de réinitialisation envoyé par e-mail.");
+  };
 
   const ADMIN_EMAIL = "admin@ecocleanexpert.ci";
   const ADMIN_PASSWORD = "EcoClean2025!";
@@ -70,11 +82,15 @@ export function AdminLogin({ onLogin, onBack, content }: { onLogin: (a: { email:
               </div>
             </div>
             {err && <div className="text-[13px] text-red-600 bg-red-50 rounded-lg px-3 py-2">{err}</div>}
+            {info && <div className="text-[13px] text-emerald-700 bg-emerald-50 rounded-lg px-3 py-2">{info}</div>}
             <button type="submit" disabled={loading} className="w-full bg-[#0A2A6B] hover:bg-[#071B4C] disabled:opacity-60 text-white font-semibold py-3.5 rounded-xl transition-colors">
               {loading ? "Connexion…" : "Se connecter"}
             </button>
           </form>
-          <p className="mt-5 text-[11.5px] text-slate-400 text-center leading-relaxed">Accès réservé. Session sécurisée.</p>
+          <button type="button" onClick={forgot} className="mt-3 w-full text-center text-[12.5px] font-medium text-slate-500 hover:text-[#1E9BE0]">
+            Mot de passe oublié ?
+          </button>
+          <p className="mt-4 text-[11.5px] text-slate-400 text-center leading-relaxed">Accès réservé. Session sécurisée.</p>
         </div>
       </div>
     </div>

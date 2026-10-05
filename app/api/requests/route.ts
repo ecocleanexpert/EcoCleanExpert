@@ -3,7 +3,36 @@ import { getServiceSupabase } from "@/lib/supabase/server";
 import { sendRequestNotification } from "@/lib/mail";
 import type { QuoteRequest } from "@/lib/types";
 
+// Rate limiting best-effort (par instance serverless) : 5 demandes / 10 min / IP
+const WINDOW_MS = 10 * 60 * 1000;
+const MAX_PER_WINDOW = 5;
+const hits = new Map<string, number[]>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const list = (hits.get(ip) || []).filter((t) => now - t < WINDOW_MS);
+  if (list.length >= MAX_PER_WINDOW) {
+    hits.set(ip, list);
+    return true;
+  }
+  list.push(now);
+  hits.set(ip, list);
+  if (hits.size > 5000) hits.clear();
+  return false;
+}
+
 export async function POST(req: NextRequest) {
+  const ip =
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    req.headers.get("x-real-ip") ||
+    "unknown";
+  if (isRateLimited(ip)) {
+    return NextResponse.json(
+      { error: "Trop de demandes, réessayez plus tard" },
+      { status: 429 }
+    );
+  }
+
   let body: QuoteRequest;
   try {
     body = await req.json();
