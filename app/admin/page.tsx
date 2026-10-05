@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSite } from "@/lib/store";
-import { AdminLogin } from "@/components/admin/login";
 import { AdminShell } from "@/components/admin/shell";
+import { getSupabase, isSupabaseConfigured } from "@/lib/supabase/client";
 
 export default function AdminPage() {
   const router = useRouter();
@@ -18,31 +18,38 @@ export default function AdminPage() {
     saveWarning,
     dismissSaveWarning,
   } = useSite();
-  const [admin, setAdmin] = useState<{ email: string } | null>(null);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    if (sessionStorage.getItem("ece_admin") === "1") setAdmin({ email: "admin" });
-    setReady(true);
-  }, []);
+    let cancelled = false;
+    (async () => {
+      if (isSupabaseConfigured) {
+        const { data } = await getSupabase()!.auth.getSession();
+        if (!data.session) {
+          router.replace("/admin/login");
+          return;
+        }
+      } else if (sessionStorage.getItem("ece_admin") !== "1") {
+        router.replace("/admin/login");
+        return;
+      }
+      if (!cancelled) setReady(true);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [router]);
 
-  const handleLogout = () => {
-    sessionStorage.removeItem("ece_admin");
-    setAdmin(null);
+  const handleLogout = async () => {
+    if (isSupabaseConfigured) {
+      await getSupabase()!.auth.signOut();
+    } else {
+      sessionStorage.removeItem("ece_admin");
+    }
     router.push("/");
   };
 
   if (!ready) return null;
-
-  if (!admin) {
-    return (
-      <AdminLogin
-        content={content}
-        onLogin={(a) => setAdmin(a)}
-        onBack={() => router.push("/")}
-      />
-    );
-  }
 
   return (
     <>

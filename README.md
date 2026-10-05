@@ -10,7 +10,7 @@ Site vitrine + administration pour **Eco Clean Expert** (marque du groupe JULMAR
 
 - **Next.js 14** (App Router) + **TypeScript strict**
 - **Tailwind CSS**
-- Persistance : `localStorage` (étape 1 — migration vers Supabase prévue à l'étape 2)
+- **Supabase** (Auth, PostgreSQL + RLS, Storage) — avec repli `localStorage` tant que les variables d'env ne sont pas définies
 - Identité visuelle préservée du prototype : `#1E9BE0`, `#0A2A6B`, `#5CC63D`, `#071B2C`, police Inter
 
 ## Démarrage
@@ -55,15 +55,28 @@ public/images/                  # assets du site
 - `ece_requests_v1` — demandes de devis
 - `ece_admin` (sessionStorage) — session admin
 
+## Supabase (étape 2)
+
+1. Dans le dashboard Supabase → **SQL Editor**, exécuter dans l'ordre :
+   - `supabase/migrations/0001_init.sql` (tables, RLS, buckets Storage `media`/`site`/`services`/`before-after`/`testimonials`)
+   - `supabase/seed.sql` (contenu du site + services/zones/FAQ/légal)
+2. **Authentication → Users** : créer l'utilisateur admin (ex. `admin@ecocleanexpert.ci`).
+3. Copier `.env.example` → `.env.local` et renseigner `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   (Settings → API). Mêmes variables à configurer dans Vercel.
+
+Sans ces variables, l'app fonctionne comme à l'étape 1 (localStorage + identifiants démo).
+Avec : contenu lu/écrit dans `site_content` (JSONB), demandes dans `requests`,
+médias uploadés vers le bucket `media`, `/admin` protégé par Supabase Auth + middleware.
+
 ## Admin
 
-Route `/admin`. Identifiants de démonstration inchangés par rapport au prototype
-(`admin@ecocleanexpert.ci`). **Étape 2** les remplacera par Supabase Auth + middleware.
+Route `/admin`. Supabase Auth si configuré, sinon identifiants de démonstration
+du prototype (`admin@ecocleanexpert.ci`).
 
 ## Feuille de route
 
-- [x] Étape 1 — migration fidèle vers Next.js + TS + Tailwind (cette PR)
-- [ ] Étape 2 — Supabase : Auth, PostgreSQL + RLS, Storage, middleware `/admin`
+- [x] Étape 1 — migration fidèle vers Next.js + TS + Tailwind
+- [x] Étape 2 — Supabase : Auth, PostgreSQL + RLS, Storage, middleware `/admin`
 - [ ] Étape 3 — emails Resend, SEO (`sitemap`, schema.org, pages `/services/[slug]`), GA4, déploiement Vercel
 
 Voir `docs/TODO.md` du prototype pour la liste complète.

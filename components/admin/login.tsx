@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { I } from "@/lib/icons";
 import { LogoBlock } from "@/components/chrome";
+import { getSupabase, isSupabaseConfigured } from "@/lib/supabase/client";
 import type { SiteContent } from "@/lib/defaultContent";
 
 export function AdminLogin({ onLogin, onBack, content }: { onLogin: (a: { email: string }) => void; onBack: () => void; content: SiteContent }) {
@@ -10,18 +11,40 @@ export function AdminLogin({ onLogin, onBack, content }: { onLogin: (a: { email:
   const [pass, setPass] = useState("");
   const [err, setErr] = useState("");
   const [showPass, setShowPass] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const ADMIN_EMAIL = "admin@ecocleanexpert.ci";
   const ADMIN_PASSWORD = "EcoClean2025!";
 
-  const submit = (e: any) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !pass) { setErr("Veuillez renseigner vos identifiants."); return; }
-    if (email.trim().toLowerCase() !== ADMIN_EMAIL.toLowerCase() || pass !== ADMIN_PASSWORD) {
-      setErr("Email ou mot de passe incorrect."); return;
+    setLoading(true);
+    setErr("");
+    try {
+      if (isSupabaseConfigured) {
+        const sb = getSupabase();
+        const { error } = await sb!.auth.signInWithPassword({
+          email: email.trim(),
+          password: pass,
+        });
+        if (error) {
+          setErr("Email ou mot de passe incorrect.");
+          return;
+        }
+        onLogin({ email });
+        return;
+      }
+      // Repli démo (localStorage) tant que Supabase n'est pas configuré
+      if (email.trim().toLowerCase() !== ADMIN_EMAIL.toLowerCase() || pass !== ADMIN_PASSWORD) {
+        setErr("Email ou mot de passe incorrect.");
+        return;
+      }
+      sessionStorage.setItem("ece_admin", "1");
+      onLogin({ email });
+    } finally {
+      setLoading(false);
     }
-    sessionStorage.setItem("ece_admin", "1");
-    onLogin({ email });
   };
 
   return (
@@ -47,7 +70,9 @@ export function AdminLogin({ onLogin, onBack, content }: { onLogin: (a: { email:
               </div>
             </div>
             {err && <div className="text-[13px] text-red-600 bg-red-50 rounded-lg px-3 py-2">{err}</div>}
-            <button type="submit" className="w-full bg-[#0A2A6B] hover:bg-[#071B4C] text-white font-semibold py-3.5 rounded-xl transition-colors">Se connecter</button>
+            <button type="submit" disabled={loading} className="w-full bg-[#0A2A6B] hover:bg-[#071B4C] disabled:opacity-60 text-white font-semibold py-3.5 rounded-xl transition-colors">
+              {loading ? "Connexion…" : "Se connecter"}
+            </button>
           </form>
           <p className="mt-5 text-[11.5px] text-slate-400 text-center leading-relaxed">Accès réservé. Session sécurisée.</p>
         </div>
