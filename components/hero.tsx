@@ -63,7 +63,7 @@ export function TypewriterHero({ phrases, settings }: { phrases: { line1: string
   const cursorOnLine1 = !line2;
 
   return (
-    <h1 className="relative mt-3 text-[30px] leading-[1.05] sm:text-[40px] lg:text-[52px] font-extrabold tracking-[-0.03em] text-[#0A2A6B]">
+    <h1 className="relative mt-3 text-[30px] leading-[1.05] sm:text-[40px] lg:text-[46px] font-extrabold tracking-[-0.03em] text-[#0A2A6B]">
       {/* Ghost : réserve l'espace de la phrase la plus longue */}
       <span className="invisible block" aria-hidden="true">
         <span className="block">{longest.line1 || " "}</span>
@@ -106,7 +106,7 @@ export function Hero({ content }: { content: SiteContent }) {
   return (
     <section
       id="accueil"
-      className="relative w-full overflow-hidden min-h-[720px] lg:min-h-[760px] flex items-center"
+      className="relative w-full overflow-hidden min-h-[720px] lg:min-h-[700px] flex items-center"
     >
       {/* Image de fond plein écran */}
       <div className="absolute inset-0">
@@ -122,7 +122,7 @@ export function Hero({ content }: { content: SiteContent }) {
       </div>
 
       {/* Contenu — panneau blanc transparent */}
-      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-24 lg:py-28">
+      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-20 lg:py-24">
         <div className="lg:max-w-[580px]">
             <div className="bg-white/85 sm:bg-white/75 lg:bg-white/60 backdrop-blur-xl rounded-3xl p-5 sm:p-8 shadow-[0_24px_70px_-24px_rgba(15,23,42,0.35)] ring-1 ring-white/40">
 
@@ -163,19 +163,19 @@ export function Hero({ content }: { content: SiteContent }) {
               </div>
 
               {/* CTA — boutons premium */}
-              <div className="mt-6 flex flex-col gap-3">
+              <div className="mt-6 flex flex-col sm:flex-row gap-3">
                 {/* Bouton principal — WhatsApp */}
                 <a
                   href={waLink()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative w-full inline-flex items-center justify-between gap-3 bg-gradient-to-r from-[#5CC63D] to-[#4CAF50] hover:from-[#4CAF50] hover:to-[#3F9A38] text-white font-bold px-4 sm:px-5 py-4 rounded-2xl transition-all duration-300 shadow-[0_12px_32px_-10px_rgba(92,198,61,0.75)] hover:shadow-[0_16px_40px_-10px_rgba(92,198,61,0.85)] hover:-translate-y-0.5 active:translate-y-0"
+                  className="group relative w-full sm:flex-1 inline-flex items-center justify-between gap-3 bg-gradient-to-r from-[#5CC63D] to-[#4CAF50] hover:from-[#4CAF50] hover:to-[#3F9A38] text-white font-bold px-4 sm:px-5 py-4 rounded-2xl transition-all duration-300 shadow-[0_12px_32px_-10px_rgba(92,198,61,0.75)] hover:shadow-[0_16px_40px_-10px_rgba(92,198,61,0.85)] hover:-translate-y-0.5 active:translate-y-0"
                 >
                   <span className="flex items-center gap-3 min-w-0">
                     <span className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0 ring-2 ring-white/30">
                       {I.wa("w-5 h-5")}
                     </span>
-                    <span className="text-[15px] leading-tight">{h.ctaPrimary}</span>
+                    <span className="text-[13.5px] sm:text-[13px] lg:text-[14.5px] leading-tight">{h.ctaPrimary}</span>
                   </span>
                   <span className="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center shrink-0 transition-transform group-hover:translate-x-0.5">
                     {I.arrow("w-4 h-4")}
@@ -185,7 +185,7 @@ export function Hero({ content }: { content: SiteContent }) {
                 {/* Bouton secondaire — Voir transformations */}
                 <a
                   href="#avant-apres"
-                  className="group w-full inline-flex items-center justify-between gap-3 bg-white hover:bg-slate-50 text-slate-900 font-bold px-4 sm:px-5 py-4 rounded-2xl transition-all duration-300 ring-1 ring-slate-200 hover:ring-slate-300 shadow-[0_4px_16px_-6px_rgba(15,23,42,0.08)]"
+                  className="group w-full sm:flex-1 inline-flex items-center justify-between gap-3 bg-white hover:bg-slate-50 text-slate-900 font-bold px-4 sm:px-5 py-4 rounded-2xl transition-all duration-300 ring-1 ring-slate-200 hover:ring-slate-300 shadow-[0_4px_16px_-6px_rgba(15,23,42,0.08)]"
                 >
                   <span className="flex items-center gap-3 min-w-0">
                     <span className="relative w-10 h-10 rounded-full bg-gradient-to-br from-[#1E9BE0] to-[#0A2A6B] text-white flex items-center justify-center shrink-0 shadow-md">
@@ -194,7 +194,7 @@ export function Hero({ content }: { content: SiteContent }) {
                       </svg>
                       <span className="absolute inset-0 rounded-full bg-[#1E9BE0] opacity-40 animate-ping" style={{ animationDuration: "2.5s" }} />
                     </span>
-                    <span className="text-[15px] leading-tight">{h.ctaSecondary}</span>
+                    <span className="text-[13.5px] sm:text-[13px] lg:text-[14.5px] leading-tight">{h.ctaSecondary}</span>
                   </span>
                   <span className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center shrink-0 transition-transform group-hover:translate-x-0.5">
                     {I.arrow("w-4 h-4 text-slate-600")}
