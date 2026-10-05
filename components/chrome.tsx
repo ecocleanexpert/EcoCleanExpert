@@ -12,10 +12,12 @@ export function LogoBlock({ content, variant = "header" }: { content: SiteConten
   const tagT = { header: "Expert du nettoyage express", footer: "Expert du nettoyage express", sidebar: "Administration", login: "Espace administrateur" }[variant];
   const wrapCls = (variant === "footer" || variant === "sidebar") ? "bg-white rounded-lg p-1 inline-flex items-center justify-center shrink-0" : "";
   const wrapSize = variant === "footer" ? "w-16 h-16 p-2 rounded-xl" : variant === "sidebar" ? "w-11 h-11 p-1 rounded-lg" : "";
+  const src = content.brand.logo;
+  const logoSrc = /^(https?:|data:|\/)/.test(src) ? src : `/${src}`;
   return (
     <div className="flex items-center gap-2.5">
       <div className={`${wrapCls} ${wrapSize}`}>
-        <img src={content.brand.logo} alt="Logo Eco Clean Expert" className={`${logo} w-auto object-contain`} />
+        <img src={logoSrc} alt="Logo Eco Clean Expert" className={`${logo} w-auto object-contain`} />
       </div>
       <div className="leading-[1.05]">
         <div className={`font-extrabold tracking-[-0.02em] ${nameC}`}>{content.brand.name}</div>
