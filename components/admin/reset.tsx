@@ -18,8 +18,13 @@ export function AdminReset({ content, onDone }: { content: SiteContent; onDone: 
     const sb = getSupabase();
     if (!sb) { setSessionReady(false); return; }
 
+    // Une fois la session confirmée on ne repasse plus en "invalide"
+    // (double montage StrictMode / événements auth ultérieurs)
+    let ready = false;
+    const markReady = () => { ready = true; setSessionReady(true); };
+
     const { data: { subscription } } = sb.auth.onAuthStateChange((event, session) => {
-      if (event === "PASSWORD_RECOVERY" || session) setSessionReady(true);
+      if ((event === "PASSWORD_RECOVERY" || session) && !ready) markReady();
     });
 
     const init = async () => {
@@ -27,10 +32,11 @@ export function AdminReset({ content, onDone }: { content: SiteContent; onDone: 
       const code = new URLSearchParams(window.location.search).get("code");
       if (code) {
         const { error } = await sb.auth.exchangeCodeForSession(code);
-        if (!error) { setSessionReady(true); return; }
+        if (!error) { markReady(); return; }
+        if (ready) return;
       }
       const { data } = await sb.auth.getSession();
-      setSessionReady(Boolean(data.session));
+      if (!ready) setSessionReady(Boolean(data.session));
     };
     init();
 
