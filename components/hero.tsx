@@ -162,33 +162,43 @@ export function Hero({ content }: { content: SiteContent }) {
                 <span className="text-[26px] lg:text-[30px] font-extrabold tracking-[-0.02em] text-[#0A2A6B]">{h.price}</span>
               </div>
 
-              {/* CTA — boutons réorganisés */}
-              <div className="mt-6 flex flex-col sm:flex-row gap-3">
+              {/* CTA — boutons premium */}
+              <div className="mt-6 flex flex-col gap-3">
                 {/* Bouton principal — WhatsApp */}
                 <a
                   href={waLink()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex-1 inline-flex items-center justify-center gap-2.5 bg-[#5CC63D] hover:bg-[#4CAF50] text-white text-[14px] font-semibold px-5 h-14 rounded-full transition-all shadow-[0_10px_30px_-10px_rgba(92,198,61,0.65)] whitespace-nowrap"
+                  className="group relative w-full inline-flex items-center justify-between gap-3 bg-gradient-to-r from-[#5CC63D] to-[#4CAF50] hover:from-[#4CAF50] hover:to-[#3F9A38] text-white font-bold px-4 sm:px-5 py-4 rounded-2xl transition-all duration-300 shadow-[0_12px_32px_-10px_rgba(92,198,61,0.75)] hover:shadow-[0_16px_40px_-10px_rgba(92,198,61,0.85)] hover:-translate-y-0.5 active:translate-y-0"
                 >
-                  <span className="w-7 h-7 rounded-full bg-white/25 flex items-center justify-center shrink-0">
-                    {I.wa("w-4 h-4")}
+                  <span className="flex items-center gap-3 min-w-0">
+                    <span className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0 ring-2 ring-white/30">
+                      {I.wa("w-5 h-5")}
+                    </span>
+                    <span className="text-[15px] leading-tight">{h.ctaPrimary}</span>
                   </span>
-                  <span>{h.ctaPrimary}</span>
-                  <span className="transition-transform group-hover:translate-x-0.5">{I.arrow("w-4 h-4")}</span>
+                  <span className="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center shrink-0 transition-transform group-hover:translate-x-0.5">
+                    {I.arrow("w-4 h-4")}
+                  </span>
                 </a>
 
                 {/* Bouton secondaire — Voir transformations */}
                 <a
                   href="#avant-apres"
-                  className="group flex-1 inline-flex items-center justify-center gap-2.5 bg-white hover:bg-slate-50 text-slate-800 text-[14px] font-semibold px-5 h-14 rounded-full transition-colors ring-1 ring-slate-200 whitespace-nowrap"
+                  className="group w-full inline-flex items-center justify-between gap-3 bg-white hover:bg-slate-50 text-slate-900 font-bold px-4 sm:px-5 py-4 rounded-2xl transition-all duration-300 ring-1 ring-slate-200 hover:ring-slate-300 shadow-[0_4px_16px_-6px_rgba(15,23,42,0.08)]"
                 >
-                  <span className="w-7 h-7 rounded-full bg-[#1E9BE0] text-white flex items-center justify-center shrink-0">
-                    <svg viewBox="0 0 24 24" className="w-3 h-3 ml-0.5" fill="currentColor">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
+                  <span className="flex items-center gap-3 min-w-0">
+                    <span className="relative w-10 h-10 rounded-full bg-gradient-to-br from-[#1E9BE0] to-[#0A2A6B] text-white flex items-center justify-center shrink-0 shadow-md">
+                      <svg viewBox="0 0 24 24" className="w-4 h-4 ml-0.5" fill="currentColor">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                      <span className="absolute inset-0 rounded-full bg-[#1E9BE0] opacity-40 animate-ping" style={{ animationDuration: "2.5s" }} />
+                    </span>
+                    <span className="text-[15px] leading-tight">{h.ctaSecondary}</span>
                   </span>
-                  <span>{h.ctaSecondary}</span>
+                  <span className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center shrink-0 transition-transform group-hover:translate-x-0.5">
+                    {I.arrow("w-4 h-4 text-slate-600")}
+                  </span>
                 </a>
               </div>
 
