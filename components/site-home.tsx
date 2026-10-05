@@ -58,7 +58,7 @@ export function SiteHome() {
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           title="Retour en haut"
-          className="fixed bottom-5 right-20 lg:bottom-20 lg:right-5 z-40 w-12 h-12 rounded-full bg-[#1E9BE0] hover:bg-[#1785c4] text-white shadow-lg flex items-center justify-center transition-colors"
+          className="fixed bottom-24 right-4 lg:bottom-20 lg:right-5 z-40 w-12 h-12 rounded-full bg-[#1E9BE0] hover:bg-[#1785c4] text-white shadow-lg flex items-center justify-center transition-colors"
           aria-label="Retour en haut"
         >
           {I.arrow("w-5 h-5 -rotate-90")}
