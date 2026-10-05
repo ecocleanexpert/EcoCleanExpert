@@ -226,6 +226,7 @@ export function ContactFormSection({ content, onNewRequest }: { content: SiteCon
                       Service souhaité <span className="text-red-500">*</span>
                     </label>
                     <select
+                      aria-label="Service souhaité"
                       value={form.service}
                       onChange={(e) => setField("service", e.target.value)}
                       onBlur={() => onBlur("service")}
@@ -242,6 +243,7 @@ export function ContactFormSection({ content, onNewRequest }: { content: SiteCon
                       Commune <span className="text-red-500">*</span>
                     </label>
                     <select
+                      aria-label="Commune"
                       value={form.commune}
                       onChange={(e) => setField("commune", e.target.value)}
                       onBlur={() => onBlur("commune")}

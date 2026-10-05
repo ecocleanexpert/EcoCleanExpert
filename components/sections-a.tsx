@@ -215,6 +215,8 @@ export function ParentCompanySection({ content }: { content: SiteContent }) {
                 <img
                   src={pc.logo || "images/julmarketing-logo.png"}
                   alt={pc.name}
+                  width={340}
+                  height={200}
                   className="w-full max-w-[340px] mx-auto object-contain"
                 />
               </div>

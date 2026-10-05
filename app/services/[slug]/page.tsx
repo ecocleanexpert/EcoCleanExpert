@@ -76,7 +76,7 @@ export default async function ServicePage({ params }: { params: Params }) {
         <div className="mt-8 grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           <div className="rounded-3xl overflow-hidden ring-1 ring-slate-900/5 shadow-lg">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={`/${img}`} alt={`${service.title} — nettoyage professionnel Abidjan`} className="w-full h-auto object-cover aspect-[4/3]" />
+            <img src={`/${img}`} alt={`${service.title} — nettoyage professionnel Abidjan`} width={800} height={600} className="w-full h-auto object-cover aspect-[4/3]" />
           </div>
           <div>
             <div className="text-[12px] font-bold tracking-[0.18em] text-[#1E9BE0] uppercase">Nos services</div>

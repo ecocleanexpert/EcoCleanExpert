@@ -17,7 +17,7 @@ export function LogoBlock({ content, variant = "header" }: { content: SiteConten
   return (
     <div className="flex items-center gap-2.5">
       <div className={`${wrapCls} ${wrapSize}`}>
-        <img src={logoSrc} alt="Logo Eco Clean Expert" className={`${logo} w-auto object-contain`} />
+        <img src={logoSrc} alt="Logo Eco Clean Expert" width={48} height={48} className={`${logo} w-auto object-contain`} />
       </div>
       <div className="leading-[1.05]">
         <div className={`font-extrabold tracking-[-0.02em] ${nameC}`}>{content.brand.name}</div>
@@ -155,17 +155,17 @@ export function Footer({ content, onAdmin, onNavigate }: { content: SiteContent;
             <p className="mt-5 text-[14px] leading-relaxed max-w-xs">Le nettoyage professionnel pour des espaces plus sains et plus agréables, à domicile et auprès des professionnels.</p>
           </div>
           <div>
-            <h4 className="text-[13px] font-bold uppercase tracking-wider text-white">Liens rapides</h4>
+            <h3 className="text-[13px] font-bold uppercase tracking-wider text-white">Liens rapides</h3>
             <ul className="mt-4 space-y-2.5 text-[14px]">
               {[{ href: "#accueil", label: "Accueil" }, { href: "#services", label: "Services" }, { href: "#avant-apres", label: "Avant / Après" }, { href: "#pourquoi", label: "À propos" }, { href: "#tarifs", label: "Tarifs" }, { href: "#contact", label: "Contact" }].map((l) => (<li key={l.href}><a href={l.href} className="hover:text-white transition-colors">{l.label}</a></li>))}
             </ul>
           </div>
           <div>
-            <h4 className="text-[13px] font-bold uppercase tracking-wider text-white">Nos services</h4>
+            <h3 className="text-[13px] font-bold uppercase tracking-wider text-white">Nos services</h3>
             <ul className="mt-4 space-y-2.5 text-[14px]">{services.map((s) => (<li key={s.id}><a href="#services" className="hover:text-white transition-colors">{s.title}</a></li>))}</ul>
           </div>
           <div>
-            <h4 className="text-[13px] font-bold uppercase tracking-wider text-white">Contact</h4>
+            <h3 className="text-[13px] font-bold uppercase tracking-wider text-white">Contact</h3>
             <ul className="mt-4 space-y-3 text-[14px]">
               <li><a href={`tel:${content.contact.phone.replace(/\s/g, "")}`} className="inline-flex items-center gap-2.5 hover:text-white transition-colors"><span className="text-[#5CC63D]">{I.phone("w-4 h-4")}</span> {content.contact.phone}</a></li>
               <li className="inline-flex items-center gap-2.5"><span className="text-[#5CC63D]">{I.pin("w-4 h-4")}</span> {content.contact.city}</li>
@@ -184,6 +184,8 @@ export function Footer({ content, onAdmin, onNavigate }: { content: SiteContent;
                       <img
                         src={content.parentCompany.logo}
                         alt={content.parentCompany.name}
+                        width={56}
+                        height={56}
                         className="w-full h-full object-contain"
                       />
                     </div>
@@ -244,7 +246,7 @@ export function Footer({ content, onAdmin, onNavigate }: { content: SiteContent;
             )}
           </div>
         </div>
-        <div className="mt-12 pt-7 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12.5px] text-white/45">
+        <div className="mt-12 pt-7 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12.5px] text-white/65">
                     <span>
             © {new Date().getFullYear()} {content.brand.name} — une marque de{" "}
             <strong className="text-white/60">{content.parentCompany?.name || "JULMARKETING Corporation"}</strong>.
