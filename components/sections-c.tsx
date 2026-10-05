@@ -118,7 +118,7 @@ export function Zones({ content }: { content: SiteContent }) {
           </div>
           <Reveal delay={100}>
             <div className="relative rounded-3xl overflow-hidden ring-1 ring-slate-900/5 shadow-[0_24px_60px_-30px_rgba(15,23,42,0.35)]">
-              <Img src="images/abidjan.jpg" alt="Vue d'Abidjan — zone d'intervention" className="w-full h-[340px] sm:h-[420px] object-cover" />
+              <Img src="images/abidjan.webp" alt="Vue d'Abidjan — zone d'intervention" className="w-full h-[340px] sm:h-[420px] object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0A2A6B]/60 to-transparent" />
               <div className="absolute bottom-5 left-5 right-5 flex items-center gap-3 bg-white/95 backdrop-blur rounded-2xl p-4">
                 <div className="w-11 h-11 rounded-xl bg-[#5CC63D]/10 text-[#5CC63D] flex items-center justify-center shrink-0">{I.pin("w-5 h-5")}</div>
