@@ -17,7 +17,24 @@ export function AdminReset({ content, onDone }: { content: SiteContent; onDone: 
   useEffect(() => {
     const sb = getSupabase();
     if (!sb) { setSessionReady(false); return; }
-    sb.auth.getSession().then(({ data }) => setSessionReady(Boolean(data.session)));
+
+    const { data: { subscription } } = sb.auth.onAuthStateChange((event, session) => {
+      if (event === "PASSWORD_RECOVERY" || session) setSessionReady(true);
+    });
+
+    const init = async () => {
+      // Lien Supabase : soit ?code= (PKCE) soit #access_token= (implicit, détecté automatiquement)
+      const code = new URLSearchParams(window.location.search).get("code");
+      if (code) {
+        const { error } = await sb.auth.exchangeCodeForSession(code);
+        if (!error) { setSessionReady(true); return; }
+      }
+      const { data } = await sb.auth.getSession();
+      setSessionReady(Boolean(data.session));
+    };
+    init();
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const submit = async (e: React.FormEvent) => {
