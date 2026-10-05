@@ -106,7 +106,7 @@ export function Hero({ content }: { content: SiteContent }) {
       <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-24 lg:py-28">
         <div className="lg:max-w-[580px]">
           <Reveal>
-            <div className="bg-white/85 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-[0_24px_70px_-24px_rgba(15,23,42,0.35)] ring-1 ring-white/60">
+            <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-6 sm:p-8 shadow-[0_24px_70px_-24px_rgba(15,23,42,0.35)] ring-1 ring-white/60">
 
               {/* Label */}
               <div className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.18em] text-[#1E9BE0] uppercase">
