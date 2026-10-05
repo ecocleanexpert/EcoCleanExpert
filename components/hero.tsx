@@ -50,22 +50,39 @@ export function TypewriterHero({ phrases, settings }: { phrases: { line1: string
     return () => clearTimeout(timer);
   }, [line1, line2, phase, idx, phrases, typingSpeed, erasingSpeed, pauseBetweenLines, holdDuration, pauseBeforeErasing]);
 
+  const longest = useMemo(() => {
+    let l1 = "";
+    let l2 = "";
+    phrases.forEach((p) => {
+      if ((p.line1 || "").length > l1.length) l1 = p.line1;
+      if ((p.line2 || "").length > l2.length) l2 = p.line2;
+    });
+    return { line1: l1, line2: l2 };
+  }, [phrases]);
+
   const cursorOnLine1 = !line2;
 
   return (
-    <h1 className="mt-3 text-[30px] leading-[1.05] sm:text-[40px] lg:text-[52px] font-extrabold tracking-[-0.03em] text-[#0A2A6B] min-h-[64px] sm:min-h-[88px] lg:min-h-[108px]">
-      <span>
-        {line1}
-        {cursorOnLine1 && (
-          <span className="cursor-blink inline-block w-[3px] h-[0.85em] bg-[#1E9BE0] ml-1 align-middle rounded-sm" />
-        )}
+    <h1 className="relative mt-3 text-[30px] leading-[1.05] sm:text-[40px] lg:text-[52px] font-extrabold tracking-[-0.03em] text-[#0A2A6B]">
+      {/* Ghost : réserve l'espace de la phrase la plus longue */}
+      <span className="invisible block" aria-hidden="true">
+        <span className="block">{longest.line1 || " "}</span>
+        <span className="block">{longest.line2 || " "}</span>
       </span>
-      <br />
-      <span className="text-[#1E9BE0]">
-        {line2}
-        {!cursorOnLine1 && (
-          <span className="cursor-blink inline-block w-[3px] h-[0.85em] bg-[#1E9BE0] ml-1 align-middle rounded-sm" />
-        )}
+      {/* Texte animé en absolu : ne peut pas agrandir le h1 */}
+      <span className="absolute top-0 left-0 right-0 pointer-events-none">
+        <span className="block min-h-[1.05em]">
+          {line1}
+          {cursorOnLine1 && (
+            <span className="cursor-blink inline-block w-[3px] h-[0.85em] bg-[#1E9BE0] ml-1 align-middle rounded-sm" />
+          )}
+        </span>
+        <span className="block text-[#1E9BE0] min-h-[1.05em]">
+          {line2}
+          {!cursorOnLine1 && (
+            <span className="cursor-blink inline-block w-[3px] h-[0.85em] bg-[#1E9BE0] ml-1 align-middle rounded-sm" />
+          )}
+        </span>
       </span>
     </h1>
   );
