@@ -56,8 +56,12 @@ export function AdminAccounts({ onToast }: { onToast: ToastFn }) {
   useEffect(() => { load(); }, []);
 
   const add = async () => {
-    if (!email.trim() || password.length < 8) {
-      onToast("Email et mot de passe (8 caractères min.) requis", "error");
+    if (!email.trim()) {
+      onToast("E-mail requis", "error");
+      return;
+    }
+    if (password && password.length < 8) {
+      onToast("Mot de passe : 8 caractères minimum (ou vide pour inviter par e-mail)", "error");
       return;
     }
     setSaving(true);
@@ -68,7 +72,7 @@ export function AdminAccounts({ onToast }: { onToast: ToastFn }) {
       });
       const json = await res.json();
       if (!res.ok) { onToast(json.error || "Échec de création", "error"); return; }
-      onToast(`Compte ${email.trim()} créé`);
+      onToast(password ? `Compte ${email.trim()} créé` : `Invitation envoyée à ${email.trim()}`);
       setAdding(false); setEmail(""); setPassword(""); setRole("editor");
       load();
     } finally {
@@ -113,7 +117,7 @@ export function AdminAccounts({ onToast }: { onToast: ToastFn }) {
         <div className="bg-white rounded-2xl p-5 ring-1 ring-slate-900/5 space-y-4">
           <div className="grid sm:grid-cols-2 gap-4">
             <TextField label="E-mail" value={email} onChange={setEmail} placeholder="prenom@ecocleanexpert.ci" type="email" />
-            <TextField label="Mot de passe (8+ caractères)" value={password} onChange={setPassword} type="password" placeholder="••••••••" />
+            <TextField label="Mot de passe (vide = invitation par e-mail)" value={password} onChange={setPassword} type="password" placeholder="Laisser vide pour envoyer une invitation" />
           </div>
           <div>
             <label className="text-[12.5px] font-semibold text-slate-700 block mb-1.5">Rôle</label>
@@ -133,7 +137,7 @@ export function AdminAccounts({ onToast }: { onToast: ToastFn }) {
             </div>
           </div>
           <div className="flex gap-2">
-            <Btn variant="primary" onClick={add}>{saving ? "Création…" : "Créer le compte"}</Btn>
+            <Btn variant="primary" onClick={add}>{saving ? "Envoi…" : password ? "Créer le compte" : "Envoyer l'invitation"}</Btn>
             <Btn variant="outline" onClick={() => setAdding(false)}>Annuler</Btn>
           </div>
         </div>

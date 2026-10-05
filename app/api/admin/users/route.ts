@@ -45,18 +45,30 @@ export async function POST(req: NextRequest) {
   const auth = await requireSuperAdmin(req);
   if (auth.error) return auth.error;
   const { email, password, role } = await req.json();
-  if (!email?.trim() || !password || password.length < 8) {
-    return NextResponse.json({ error: "Email et mot de passe (8+) requis" }, { status: 400 });
+  if (!email?.trim()) {
+    return NextResponse.json({ error: "Email requis" }, { status: 400 });
+  }
+  if (password && password.length < 8) {
+    return NextResponse.json({ error: "Mot de passe : 8 caractères minimum" }, { status: 400 });
   }
   if (!["super_admin", "admin", "editor"].includes(role)) {
     return NextResponse.json({ error: "Rôle invalide" }, { status: 400 });
   }
   const sb = auth.sb!;
-  const { error: createErr } = await sb.auth.admin.createUser({
-    email: email.trim().toLowerCase(),
-    password,
-    email_confirm: true,
-  });
+  let createErr;
+  if (password) {
+    ({ error: createErr } = await sb.auth.admin.createUser({
+      email: email.trim().toLowerCase(),
+      password,
+      email_confirm: true,
+    }));
+  } else {
+    // Invitation par e-mail : le destinataire choisit son mot de passe
+    ({ error: createErr } = await sb.auth.admin.inviteUserByEmail(
+      email.trim().toLowerCase(),
+      { redirectTo: `${req.nextUrl.origin}/admin/reset` }
+    ));
+  }
   if (createErr) return NextResponse.json({ error: createErr.message }, { status: 400 });
   const { error } = await sb.from("admin_users").upsert({ email: email.trim().toLowerCase(), role });
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
