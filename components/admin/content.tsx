@@ -1,18 +1,44 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { I } from "@/lib/icons";
 import { Btn, ImageField, MediaPicker, NumberField, TextArea, TextField, Toggle } from "@/components/fields";
 import type { MediaItem, SetContent, ToastFn } from "@/lib/types";
 import type { SiteContent } from "@/lib/defaultContent";
+import { mergeContent } from "@/lib/mergeContent";
 
 export function AdminContent({ content, setContent, media, onToast }: { content: SiteContent; setContent: SetContent; media: MediaItem[]; onToast: ToastFn }) {
   const [draft, setDraft] = useState(content);
   const [pickerFor, setPickerFor] = useState<any>(null);
+  const importRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => { setDraft(content); }, [content]);
 
   const save = () => { setContent(draft); onToast("Contenu enregistré"); };
+
+  const exportJson = () => {
+    const blob = new Blob([JSON.stringify(draft, null, 2)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `contenu-site-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+    onToast("Contenu exporté");
+  };
+
+  const importJson = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const parsed = JSON.parse(String(reader.result));
+        setDraft(mergeContent(parsed));
+        onToast("Contenu importé — pensez à enregistrer");
+      } catch {
+        onToast("Fichier JSON invalide");
+      }
+    };
+    reader.readAsText(file);
+  };
 
   const updateHero = (k: any, v: any) => setDraft({ ...draft, hero: { ...draft.hero, [k]: v } });
   const updateCta = (k: any, v: any) => setDraft({ ...draft, cta: { ...draft.cta, [k]: v } });
@@ -29,7 +55,22 @@ export function AdminContent({ content, setContent, media, onToast }: { content:
           <h1 className="text-[24px] font-extrabold text-slate-900">Contenu du site</h1>
           <p className="text-[14px] text-slate-500 mt-1">Modifiez tous les textes et images du site sans toucher au code.</p>
         </div>
-        <Btn variant="primary" icon={I.save("w-4 h-4")} onClick={save}>Enregistrer les modifications</Btn>
+        <div className="flex items-center gap-2 flex-wrap">
+          <Btn variant="outline" icon={I.upload("w-4 h-4 rotate-180")} onClick={exportJson}>Exporter JSON</Btn>
+          <Btn variant="outline" icon={I.upload("w-4 h-4")} onClick={() => importRef.current?.click()}>Importer JSON</Btn>
+          <input
+            ref={importRef}
+            type="file"
+            accept="application/json"
+            className="hidden"
+            onChange={(e) => {
+              const f = e.target.files?.[0];
+              if (f) importJson(f);
+              e.target.value = "";
+            }}
+          />
+          <Btn variant="primary" icon={I.save("w-4 h-4")} onClick={save}>Enregistrer les modifications</Btn>
+        </div>
       </div>
 
       <div className="bg-white rounded-2xl ring-1 ring-slate-900/5 p-6 space-y-5">

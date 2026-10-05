@@ -60,6 +60,24 @@ export function AdminRequests({ requests, setRequests, onToast }: { requests: Qu
     return "bg-red-50 text-red-500";
   };
 
+  const exportCsv = () => {
+    const header = ["Date", "Nom", "Téléphone", "Email", "Service", "Commune", "Statut", "Message"];
+    const esc = (v: string) => `"${String(v || "").replace(/"/g, '""')}"`;
+    const rows = filtered.map((r) =>
+      [r.date, r.name, r.phone, r.email, r.service, r.commune, r.status, r.message]
+        .map(esc)
+        .join(";")
+    );
+    const csv = "﻿" + [header.map(esc).join(";"), ...rows].join("\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `demandes-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+    onToast(`${filtered.length} demande(s) exportée(s)`);
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between gap-4 flex-wrap">
@@ -69,6 +87,9 @@ export function AdminRequests({ requests, setRequests, onToast }: { requests: Qu
             {requests.length} demande{requests.length !== 1 ? "s" : ""} reçue{requests.length !== 1 ? "s" : ""} au total.
           </p>
         </div>
+        <Btn variant="outline" onClick={exportCsv} disabled={filtered.length === 0}>
+          {I.upload("w-4 h-4 rotate-180")} Exporter CSV
+        </Btn>
       </div>
 
       {/* Filtres */}

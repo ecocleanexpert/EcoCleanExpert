@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { SiteProvider } from "@/lib/store";
 import { Analytics } from "@/components/analytics";
+import { ConsentBanner } from "@/components/consent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://eco-clean-expert.vercel.app";
 
@@ -71,6 +72,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
         />
         <SiteProvider>{children}</SiteProvider>
+        <ConsentBanner />
         <Analytics />
       </body>
     </html>
