@@ -29,6 +29,16 @@ export function AdminReset({ content, onDone }: { content: SiteContent; onDone: 
 
     const init = async () => {
       const params = new URLSearchParams(window.location.search);
+      // Lien verify Supabase : #access_token=...&refresh_token=... (flux implicite —
+      // ignoré par detectSessionInUrl en mode PKCE : injection manuelle)
+      const hash = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+      const accessToken = hash.get("access_token");
+      const refreshToken = hash.get("refresh_token") || "";
+      if (accessToken) {
+        const { error } = await sb.auth.setSession({ access_token: accessToken, refresh_token: refreshToken });
+        if (!error) { markReady(); return; }
+        if (ready) return;
+      }
       // Lien email : ?token_hash=xxx&type=recovery|invite (vérification directe, pas de verifier PKCE requis)
       const tokenHash = params.get("token_hash");
       const type = params.get("type");
