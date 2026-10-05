@@ -76,10 +76,10 @@ export function Compare({ before, after, title }: { before: string; after: strin
     <div ref={ref} role="slider" aria-label={`Comparaison — ${title}`} aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(pos)} tabIndex={0}
       onKeyDown={(e) => { if (e.key === "ArrowLeft") setPos((p) => Math.max(0, p - 4)); if (e.key === "ArrowRight") setPos((p) => Math.min(100, p + 4)); }}
       onPointerDown={(e) => { dragging.current = true; update(e.clientX); }}
-      className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden select-none touch-none cursor-ew-resize ring-1 ring-slate-900/10 outline-none focus-visible:ring-2 focus-visible:ring-[#5CC63D]">
-      <Img src={after} alt={`Après — ${title}`} className="absolute inset-0 w-full h-full object-cover" />
+      className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden select-none touch-none cursor-ew-resize ring-1 ring-slate-900/10 outline-none focus-visible:ring-2 focus-visible:ring-[#5CC63D] bg-slate-800">
+      <img src={after} alt={`Après — ${title}`} className="absolute inset-0 w-full h-full object-cover" loading="eager" decoding="async" />
       <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
-        <Img src={before} alt={`Avant — ${title}`} className="absolute inset-0 w-full h-full object-cover" />
+        <img src={before} alt={`Avant — ${title}`} className="absolute inset-0 w-full h-full object-cover" loading="eager" decoding="async" />
       </div>
       <span className="absolute top-3 left-3 px-3 py-1.5 rounded-full bg-slate-900/80 backdrop-blur text-white text-[11px] font-bold tracking-wide uppercase">Avant</span>
       <span className="absolute top-3 right-3 px-3 py-1.5 rounded-full bg-[#5CC63D] text-white text-[11px] font-bold tracking-wide uppercase">Après</span>
@@ -96,6 +96,20 @@ export function BeforeAfter({ content }: { content: SiteContent }) {
   const items = content.beforeAfter.filter((b) => b.active);
   const [idx, setIdx] = useState(0);
   const current = items[idx];
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const preloaded: HTMLImageElement[] = [];
+    items.forEach((it) => {
+      [it.before, it.after].forEach((url) => {
+        if (url && !url.startsWith("data:")) {
+          const img = new window.Image();
+          img.src = url.startsWith("/") || url.startsWith("http") ? url : `/${url}`;
+          preloaded.push(img);
+        }
+      });
+    });
+    return () => { preloaded.forEach((img) => { img.onload = null; img.onerror = null; }); };
+  }, [items]);
   if (!current) return null;
   return (
     <section id="avant-apres" className="py-16 lg:py-24 bg-[#0A2A6B] text-white relative overflow-hidden">
@@ -111,8 +125,9 @@ export function BeforeAfter({ content }: { content: SiteContent }) {
             <Reveal delay={120}>
               <div className="mt-8 flex gap-3">
                 {items.map((it, i) => (
-                  <button key={it.id} onClick={() => setIdx(i)} aria-label={`Voir ${it.title}`} className={`relative w-20 h-16 rounded-xl overflow-hidden ring-2 transition-all ${i === idx ? "ring-[#5CC63D] scale-105" : "ring-white/15 hover:ring-white/40"}`}>
-                    <Img src={it.before} alt={it.title} className="w-full h-full object-cover" />
+                  <button key={it.id} onClick={() => setIdx(i)} aria-label={`Voir ${it.title}`} className={`relative w-20 h-16 rounded-xl overflow-hidden ring-2 transition-all duration-300 ${i === idx ? "ring-[#5CC63D] scale-105" : "ring-white/15 hover:ring-white/40"}`}>
+                    <img src={it.before.startsWith("/") || it.before.startsWith("http") || it.before.startsWith("data:") ? it.before : `/${it.before}`} alt={it.title} loading="eager" decoding="async" className="w-full h-full object-cover" />
+                    {i !== idx && <div className="absolute inset-0 bg-[#0A2A6B]/50 hover:bg-[#0A2A6B]/20 transition-colors" />}
                   </button>
                 ))}
               </div>
@@ -121,7 +136,7 @@ export function BeforeAfter({ content }: { content: SiteContent }) {
           </div>
           <Reveal delay={100}>
             <div className="relative">
-              {current && <Compare before={current.before} after={current.after} title={current.title} />}
+              {current && <Compare key={current.id} before={current.before} after={current.after} title={current.title} />}
               {current && (<div className="mt-4 lg:hidden"><h3 className="text-[16px] font-bold">{current.title}</h3><p className="mt-1 text-[13px] text-white/60">{current.desc}</p></div>)}
             </div>
           </Reveal>
