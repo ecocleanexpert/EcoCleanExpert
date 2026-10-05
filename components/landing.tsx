@@ -12,7 +12,9 @@ import type { SiteContent } from "@/lib/defaultContent";
 export function Landing({ content, onAdmin, onNewRequest, onNavigate }: { content: SiteContent; onAdmin: () => void; onNewRequest: (r: QuoteRequest) => void; onNavigate: (t?: string) => void }) {
   return (
     <div className="bg-white pb-20 lg:pb-0">
+      <a href="#contenu" className="skip-link">Aller au contenu</a>
       <Header content={content} onAdmin={onAdmin} />
+      <main id="contenu" tabIndex={-1}>
       <Hero content={content} />
       <Services content={content} />
       <BeforeAfter content={content} />
@@ -26,6 +28,7 @@ export function Landing({ content, onAdmin, onNewRequest, onNavigate }: { conten
       <ContactFormSection content={content} onNewRequest={onNewRequest} />
 <FAQSection content={content} />
 <FinalCTA content={content} />
+      </main>
             <Footer content={content} onAdmin={onAdmin} onNavigate={onNavigate} />
       <MobileBar content={content} />
     </div>

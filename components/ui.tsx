@@ -13,7 +13,7 @@ export function Img({ src, alt, className = "", ...rest }: ImgProps) {
       </div>
     );
   }
-  return <img src={src} alt={alt} loading="lazy" decoding="async" className={className} onError={() => setErr(true)} {...rest} />;
+  return <img src={src} alt={alt} loading={rest.loading ?? "lazy"} decoding="async" className={className} onError={() => setErr(true)} {...rest} />;
 }
 
 export function useReveal(threshold = 0.15): [RefObject<any>, boolean] {

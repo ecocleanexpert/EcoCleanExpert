@@ -96,6 +96,8 @@ export function Hero({ content }: { content: SiteContent }) {
         <Img
           src={h.image}
           alt="Nettoyage professionnel Eco Clean Expert à Abidjan"
+          loading="eager"
+          fetchPriority="high"
           className="w-full h-full object-cover object-center"
         />
       </div>
