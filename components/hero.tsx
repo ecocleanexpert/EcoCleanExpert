@@ -136,7 +136,9 @@ export function Hero({ content }: { content: SiteContent }) {
               <TypewriterHero phrases={phrases} settings={h.typewriter} />
 
               {/* Trait vert */}
-              <div className="mt-4 h-[5px] w-14 rounded-full bg-[#5CC63D]" />
+              <div className="mt-4 relative h-[5px] w-20 rounded-full bg-[#5CC63D] overflow-hidden draw-bar">
+                <div className="absolute inset-0 shimmer-line" />
+              </div>
 
               {/* Sous-titre */}
               <p className="mt-5 text-[15px] lg:text-[16.5px] text-slate-700 leading-relaxed max-w-md">

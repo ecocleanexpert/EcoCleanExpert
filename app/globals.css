@@ -83,3 +83,24 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* Trait vert hero — draw-in + shimmer */
+@keyframes drawIn {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes shimmerSlide {
+  0%   { transform: translateX(-120%); }
+  60%  { transform: translateX(220%); }
+  100% { transform: translateX(220%); }
+}
+.draw-bar {
+  transform-origin: left center;
+  animation: drawIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+.shimmer-line {
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.7) 50%, transparent 100%);
+  animation: shimmerSlide 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: 1.2s;
+  pointer-events: none;
+}
