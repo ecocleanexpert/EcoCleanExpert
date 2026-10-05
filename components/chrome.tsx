@@ -17,7 +17,7 @@ export function LogoBlock({ content, variant = "header" }: { content: SiteConten
   return (
     <div className="flex items-center gap-2.5">
       <div className={`${wrapCls} ${wrapSize}`}>
-        <img src={logoSrc} alt="Logo Eco Clean Expert" width={48} height={48} className={`${logo} w-auto object-contain`} />
+        <img src={logoSrc} alt="Logo Eco Clean Expert" width={48} height={48} className={`${logo} w-auto object-contain`} loading="eager" fetchPriority="high" decoding="sync" />
       </div>
       <div className="leading-[1.05]">
         <div className={`font-extrabold tracking-[-0.02em] ${nameC}`}>{content.brand.name}</div>

@@ -67,6 +67,8 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={inter.className}>
+        <link rel="preload" as="image" href="/images/logo.png" fetchPriority="high" />
+        <link rel="preload" as="image" href="/images/hero.webp" fetchPriority="high" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
