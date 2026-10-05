@@ -6,6 +6,7 @@ import { waLink } from "@/lib/constants";
 import { Reveal } from "@/components/ui";
 import type { QuoteRequest } from "@/lib/types";
 import type { SiteContent } from "@/lib/defaultContent";
+import { isSupabaseConfigured } from "@/lib/supabase/client";
 
 export function ContactFormSection({ content, onNewRequest }: { content: SiteContent; onNewRequest?: (r: QuoteRequest) => void }) {
   const cf = content.contactForm || {};
@@ -71,7 +72,7 @@ export function ContactFormSection({ content, onNewRequest }: { content: SiteCon
     return lines.join("\n");
   };
 
-  const submit = (e: any) => {
+  const submit = async (e: any) => {
     e.preventDefault();
     if (!validateAll()) return;
     setSubmitting(true);
@@ -88,8 +89,22 @@ export function ContactFormSection({ content, onNewRequest }: { content: SiteCon
       status: "Nouveau",
     };
 
-    // Enregistrement local pour l'admin
-    if (onNewRequest) onNewRequest(request);
+    if (isSupabaseConfigured) {
+      // Insertion + notification email côté serveur (évite le doublon dans l'admin)
+      try {
+        await fetch("/api/requests", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(request),
+        });
+      } catch (err) {
+        console.error("api/requests:", err);
+        if (onNewRequest) onNewRequest(request);
+      }
+    } else if (onNewRequest) {
+      // Repli local pour l'admin
+      onNewRequest(request);
+    }
 
     // Ouverture WhatsApp
     const url = waLink(buildMessage());

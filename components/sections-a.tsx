@@ -5,6 +5,7 @@ import { I } from "@/lib/icons";
 import { waLink } from "@/lib/constants";
 import { Img, Reveal } from "@/components/ui";
 import type { SiteContent } from "@/lib/defaultContent";
+import { slugify } from "@/lib/slugs";
 
 export function Services({ content }: { content: SiteContent }) {
   const iconMap: Record<string, (c?: string) => JSX.Element> = { sofa: I.sofa, chair: I.chair, carpet: I.carpet, car: I.car, building: I.building, hammer: I.hammer };
@@ -32,7 +33,9 @@ export function Services({ content }: { content: SiteContent }) {
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/35 to-transparent" />
 <div className="absolute bottom-3 left-3 w-11 h-11 rounded-xl bg-slate-900/45 backdrop-blur flex items-center justify-center text-white shadow-md">{iconFn("w-5 h-5")}</div>                  </div>
                   <div className="p-5">
-                    <h3 className="text-[17px] font-bold text-slate-900">{s.title}</h3>
+                    <h3 className="text-[17px] font-bold text-slate-900">
+                      <a href={`/services/${slugify(s.title)}`} className="hover:text-[#1E9BE0] transition-colors">{s.title}</a>
+                    </h3>
                     <p className="mt-1.5 text-[14px] text-slate-600 leading-relaxed">{s.desc}</p>
                     <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
                       <span className="text-[13px] font-semibold text-[#0A2A6B]">{s.price}</span>

@@ -73,10 +73,19 @@ médias uploadés vers le bucket `media`, `/admin` protégé par Supabase Auth +
 Route `/admin`. Supabase Auth si configuré, sinon identifiants de démonstration
 du prototype (`admin@ecocleanexpert.ci`).
 
+## Étape 3 — Emails, SEO, Analytics
+
+- `POST /api/requests` : insère la demande dans `requests` + envoie une notification email via **Resend** (`RESEND_API_KEY`, `ADMIN_EMAIL`, `RESEND_FROM_EMAIL`).
+- SEO : `app/sitemap.ts`, `app/robots.ts` (admin exclu), JSON-LD `LocalBusiness` + `Service`, Open Graph, `metadataBase` (`NEXT_PUBLIC_SITE_URL`).
+- Pages `/services/[slug]` (SSG, metadata dédiée, liens depuis les cartes de la section Services).
+- GA4 : chargé si `NEXT_PUBLIC_GA_ID` est défini (`components/analytics.tsx`, `anonymize_ip`).
+
+Variables d'env : voir `.env.example`.
+
 ## Feuille de route
 
 - [x] Étape 1 — migration fidèle vers Next.js + TS + Tailwind
 - [x] Étape 2 — Supabase : Auth, PostgreSQL + RLS, Storage, middleware `/admin`
-- [ ] Étape 3 — emails Resend, SEO (`sitemap`, schema.org, pages `/services/[slug]`), GA4, déploiement Vercel
+- [x] Étape 3 — emails Resend, SEO, GA4, déploiement Vercel
 
 Voir `docs/TODO.md` du prototype pour la liste complète.
