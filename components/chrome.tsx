@@ -136,7 +136,6 @@ export function Header({ content, onAdmin }: { content: SiteContent; onAdmin: ()
             {links.map((l) => (<a key={l.href} href={l.href} onClick={(e) => goto(e, l.href)} className="py-3 text-[15px] font-medium text-slate-700 border-b border-slate-50 last:border-0">{l.label}</a>))}
           </nav>
           <a href={waLink()} target="_blank" rel="noopener noreferrer" className="mt-3 w-full inline-flex items-center justify-center gap-2 bg-[#5CC63D] text-white font-semibold py-3.5 rounded-full">{I.wa("w-5 h-5")} Demander un devis WhatsApp</a>
-          <button onClick={onAdmin} className="mt-3 w-full text-center text-xs text-slate-400">Espace administrateur</button>
         </div>
       </div>
     </header>
@@ -258,7 +257,6 @@ export function Footer({ content, onAdmin, onNavigate }: { content: SiteContent;
           <div className="flex items-center gap-5">
   <button onClick={() => onNavigate && onNavigate("mentions")} className="hover:text-white/80 transition-colors">Mentions légales</button>
   <button onClick={() => onNavigate && onNavigate("privacy")} className="hover:text-white/80 transition-colors">Politique de confidentialité</button>
-  <button onClick={() => onAdmin && onAdmin()} className="inline-flex items-center gap-1.5 hover:text-white/80 transition-colors">{I.lock("w-3.5 h-3.5")} Administration</button>
 </div>
         </div>
       </div>

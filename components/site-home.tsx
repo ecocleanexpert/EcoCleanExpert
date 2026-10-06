@@ -43,15 +43,7 @@ export function SiteHome() {
         {I.phone("w-5 h-5")}
       </a>
 
-      {/* Cadenas admin — desktop uniquement */}
-      <button
-        onClick={() => router.push("/admin")}
-        title="Espace administrateur"
-        className="hidden lg:flex fixed bottom-5 right-5 z-40 w-12 h-12 rounded-full bg-[#071B2C] text-white/80 hover:text-white shadow-lg items-center justify-center transition-colors"
-        aria-label="Administration"
-      >
-        {I.lock("w-5 h-5")}
-      </button>
+
 
       {/* Retour en haut */}
       {showTop && (
