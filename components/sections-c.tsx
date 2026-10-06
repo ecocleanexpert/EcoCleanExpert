@@ -57,6 +57,7 @@ export function Testimonials({ content }: { content: SiteContent }) {
     }).catch(() => {});
   }, []);
   const has = grevs.length > 0 || (content.testimonials && content.testimonials.length > 0);
+  if (content.showTestimonials !== true) return null;
   return (
     <section id="avis" className="py-16 lg:py-24 bg-slate-50/70">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">

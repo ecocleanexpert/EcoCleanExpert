@@ -43,6 +43,15 @@ export function AdminTestimonials({ content, setContent, media, onToast }: { con
         <Btn variant="primary" icon={I.plus("w-4 h-4")} onClick={openNew}>Nouveau témoignage</Btn>
       </div>
 
+      <div className="bg-white rounded-2xl ring-1 ring-slate-900/5 p-5">
+        <Toggle
+          checked={content.showTestimonials === true}
+          onChange={(v) => { setContent((c) => ({ ...c, showTestimonials: v })); onToast(v ? "Section avis visible sur le site" : "Section avis masquée"); }}
+          label="Afficher la section « Avis clients » sur le site"
+        />
+        <p className="text-[12px] text-slate-400 mt-1.5 ml-[52px]">Désactivée : toute la section (titre, avis, bouton Google) est masquée aux visiteurs.</p>
+      </div>
+
       {editing !== null && (
         <div className="bg-white rounded-2xl ring-1 ring-slate-900/5 p-6">
           <h2 className="text-[16px] font-bold text-slate-900">{editing === "new" ? "Nouveau témoignage" : "Modifier le témoignage"}</h2>

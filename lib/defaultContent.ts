@@ -254,6 +254,7 @@ ctaPrimary: "Demander un devis", ctaSecondary: "Voir les transformations",
       { id: 8, q: "Puis-je voir le résultat avant de payer ?", a: "Absolument. Nous vous montrons le résultat à la fin de l'intervention avant tout paiement. Si vous n'êtes pas satisfait, nous revenons gratuitement dans les 48h.", active: true, order: 8 },
     ],
   },
+  showTestimonials: false as boolean,
   testimonials: [] as { id: number; name: string; role: string; text: string; rating: number; photo: string; active: boolean; order: number }[],
   zones: [
     { id: 1, name: "Cocody", active: true }, { id: 2, name: "Plateau", active: true },
