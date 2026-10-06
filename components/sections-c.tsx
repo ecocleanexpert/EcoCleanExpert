@@ -3,6 +3,7 @@
 import { I } from "@/lib/icons";
 import { waLink } from "@/lib/constants";
 import { Img, Reveal } from "@/components/ui";
+import { useEffect, useState } from "react";
 import type { SiteContent } from "@/lib/defaultContent";
 
 export function Pricing({ content }: { content: SiteContent }) {
@@ -45,8 +46,17 @@ export function Pricing({ content }: { content: SiteContent }) {
 /* ============================================================
    TESTIMONIALS
 ============================================================ */
+type GRev = { author: string; photo: string | null; rating: number; text: string; time: string };
+
 export function Testimonials({ content }: { content: SiteContent }) {
-  const has = content.testimonials && content.testimonials.length > 0;
+  const [grevs, setGrevs] = useState<GRev[]>([]);
+  const [gMeta, setGMeta] = useState<{ rating: number | null; count: number | null }>({ rating: null, count: null });
+  useEffect(() => {
+    fetch("/api/reviews").then((r) => r.json()).then((d) => {
+      if (d?.reviews?.length) { setGrevs(d.reviews.slice(0, 6)); setGMeta({ rating: d.rating, count: d.count }); }
+    }).catch(() => {});
+  }, []);
+  const has = grevs.length > 0 || (content.testimonials && content.testimonials.length > 0);
   return (
     <section id="avis" className="py-16 lg:py-24 bg-slate-50/70">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
@@ -67,7 +77,39 @@ export function Testimonials({ content }: { content: SiteContent }) {
             </a>
           </div>
         </Reveal>
-        {has ? (
+        {gMeta.rating && (
+          <Reveal>
+            <div className="mb-6 flex items-center gap-2 text-[14px] font-bold text-slate-800">
+              <span className="text-[#F59E0B]">{I.star("w-4 h-4")}</span>
+              {gMeta.rating.toFixed(1)} / 5
+              {gMeta.count ? <span className="font-medium text-slate-500">· {gMeta.count} avis Google</span> : null}
+            </div>
+          </Reveal>
+        )}
+        {grevs.length > 0 ? (
+          <div className="grid md:grid-cols-3 gap-5">
+            {grevs.map((r, i) => (
+              <Reveal key={i} delay={i * 70}>
+                <article className="bg-white rounded-2xl p-6 ring-1 ring-slate-900/5 h-full">
+                  <div className="flex items-center gap-3">
+                    {r.photo ? (
+                      <Img src={r.photo} alt={r.author} className="w-12 h-12 rounded-full object-cover" />
+                    ) : (
+                      <div className="w-12 h-12 rounded-full bg-[#0A2A6B]/10 flex items-center justify-center text-[#0A2A6B] font-bold">{r.author[0]}</div>
+                    )}
+                    <div>
+                      <div className="text-[14px] font-bold text-slate-900">{r.author}</div>
+                      <div className="flex gap-0.5 text-[#F59E0B] mt-0.5">{Array.from({ length: r.rating }).map((_, k) => <span key={k}>{I.star("w-3.5 h-3.5")}</span>)}</div>
+                    </div>
+                    <span className="ml-auto text-[10px] font-bold text-slate-400 uppercase">Google</span>
+                  </div>
+                  <p className="mt-4 text-[14px] text-slate-600 leading-relaxed">"{r.text}"</p>
+                  {r.time ? <div className="mt-3 text-[11px] text-slate-400">{r.time}</div> : null}
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        ) : has ? (
           <div className="grid md:grid-cols-3 gap-5">
             {content.testimonials.filter(t => t.active !== false).map((t, i) => (
               <Reveal key={t.id} delay={i * 70}>
