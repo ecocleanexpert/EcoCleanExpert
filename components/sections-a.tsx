@@ -254,7 +254,7 @@ export function ParentCompanySection({ content }: { content: SiteContent }) {
                 {pc.legalForm && <span className="text-[#5CC63D]"> {pc.legalForm}</span>}
               </h2>
               <p className="mt-5 text-[16px] text-white/75 leading-relaxed max-w-xl">
-                {pc.shortIntro || `Eco Clean Expert est une marque du groupe ${pc.name}, entreprise multisectorielle basée à Abidjan.`}
+                {pc.shortIntro || `Eco Clean Expert est un service du groupe ${pc.name}, entreprise multisectorielle basée à Abidjan.`}
               </p>
             </Reveal>
 

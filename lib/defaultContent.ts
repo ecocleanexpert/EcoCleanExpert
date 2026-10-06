@@ -139,7 +139,7 @@ ctaPrimary: "Demander un devis", ctaSecondary: "Voir les transformations",
         {
           id: 1.5,
           title: "1 bis. Structure juridique",
-          body: "Eco Clean Expert est une marque du groupe JULMARKETING Corporation Sarl U. Les factures, reçus et documents officiels émis dans le cadre des prestations de nettoyage portent la dénomination JULMARKETING Corporation Sarl U, entité juridique responsable de l'exploitation commerciale.\n\nCette structure de groupe permet à Eco Clean Expert de s'appuyer sur la solidité financière et administrative d'une entreprise multisectorielle établie à Abidjan.",
+          body: "Eco Clean Expert est un service du groupe JULMARKETING Corporation Sarl U. Les factures, reçus et documents officiels émis dans le cadre des prestations de nettoyage portent la dénomination JULMARKETING Corporation Sarl U, entité juridique responsable de l'exploitation commerciale.\n\nCette structure de groupe permet à Eco Clean Expert de s'appuyer sur la solidité financière et administrative d'une entreprise multisectorielle établie à Abidjan.",
         },
         {
           id: 2,
@@ -272,7 +272,7 @@ ctaPrimary: "Demander un devis", ctaSecondary: "Voir les transformations",
     name: "JULMARKETING Corporation",
     legalForm: "Sarl U",
     tagline: "Entreprise multisectorielle",
-    shortIntro: "Eco Clean Expert est une marque du groupe JULMARKETING Corporation, société multisectorielle basée à Abidjan.",
+    shortIntro: "Eco Clean Expert est un service du groupe JULMARKETING Corporation, société multisectorielle basée à Abidjan.",
     logo: "images/julmarketing-logo.webp",
     branches: [
       "Nettoyage professionnel",

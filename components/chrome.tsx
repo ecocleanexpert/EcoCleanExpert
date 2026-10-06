@@ -180,7 +180,7 @@ export function Footer({ content, onAdmin, onNavigate }: { content: SiteContent;
             {content.parentCompany?.showInFooter !== false && content.parentCompany?.name && (
               <div className="mt-6 pt-6 border-t border-white/10">
                 <p className="text-[11px] font-bold uppercase tracking-wider text-white/60 mb-3">
-                  Une marque du groupe
+                  Un service du groupe
                 </p>
                 <div className="flex items-center gap-3">
                   {content.parentCompany.logo && (
@@ -252,7 +252,7 @@ export function Footer({ content, onAdmin, onNavigate }: { content: SiteContent;
         </div>
         <div className="mt-12 pt-7 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12.5px] text-white/65">
                     <span>
-            © {new Date().getFullYear()} {content.brand.name} — une marque de{" "}
+            © {new Date().getFullYear()} {content.brand.name} — un service de{" "}
             <strong className="text-white/60">{content.parentCompany?.name || "JULMARKETING Corporation"}</strong>.
           </span>
           <div className="flex items-center gap-5">
