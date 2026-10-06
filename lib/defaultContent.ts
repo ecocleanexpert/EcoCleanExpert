@@ -273,7 +273,7 @@ ctaPrimary: "Demander un devis", ctaSecondary: "Voir les transformations",
     legalForm: "Sarl U",
     tagline: "Entreprise multisectorielle",
     shortIntro: "Eco Clean Expert est une marque du groupe JULMARKETING Corporation, société multisectorielle basée à Abidjan.",
-    logo: "images/julmarketing-logo.jpeg",
+    logo: "images/julmarketing-logo.webp",
     branches: [
       "Nettoyage professionnel",
       "Commerce général",

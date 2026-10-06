@@ -110,13 +110,26 @@ export function Hero({ content }: { content: SiteContent }) {
     >
       {/* Image de fond plein écran */}
       <div className="absolute inset-0">
-        <Img
-          src={h.image}
-          alt="Nettoyage professionnel Eco Clean Expert à Abidjan"
-          loading="eager"
-          fetchPriority="high"
-          className="w-full h-full object-cover object-center"
-        />
+        {/hero\.webp$/.test(h.image) ? (
+          <img
+            src={h.image.startsWith("/") || h.image.startsWith("http") ? h.image : `/${h.image}`}
+            srcSet={`${(h.image.startsWith("/") ? h.image : `/${h.image}`).replace(/hero\.webp$/, "hero-mobile.webp")} 640w, ${h.image.startsWith("/") ? h.image : `/${h.image}`} 1200w`}
+            sizes="100vw"
+            alt="Nettoyage professionnel Eco Clean Expert à Abidjan"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+            className="w-full h-full object-cover object-center"
+          />
+        ) : (
+          <Img
+            src={h.image}
+            alt="Nettoyage professionnel Eco Clean Expert à Abidjan"
+            loading="eager"
+            fetchPriority="high"
+            className="w-full h-full object-cover object-center"
+          />
+        )}
         {/* Voile dégradé pour garantir la lisibilité sur mobile */}
         <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-white/20 to-transparent sm:from-white/20 sm:via-transparent sm:to-transparent lg:hidden" />
       </div>

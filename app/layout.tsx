@@ -67,9 +67,10 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={inter.className}>
-        <link rel="preconnect" href="https://gdertkcsaenaqoxdhhzx.supabase.co" />
+        <link rel="preconnect" href="https://gdertkcsaenaqoxdhhzx.supabase.co" crossOrigin="anonymous" />
         <link rel="preload" as="image" href="/images/logo.webp" type="image/webp" fetchPriority="high" />
-        <link rel="preload" as="image" href="/images/hero.webp" fetchPriority="high" />
+        <link rel="preload" as="image" href="/images/hero-mobile.webp" type="image/webp" fetchPriority="high" media="(max-width: 640px)" />
+        <link rel="preload" as="image" href="/images/hero.webp" type="image/webp" fetchPriority="high" media="(min-width: 641px)" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
