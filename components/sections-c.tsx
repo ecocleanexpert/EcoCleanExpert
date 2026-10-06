@@ -126,19 +126,7 @@ export function Testimonials({ content }: { content: SiteContent }) {
               </Reveal>
             ))}
           </div>
-        ) : (
-          <Reveal>
-            <div className="grid md:grid-cols-3 gap-5">
-              {[0, 1, 2].map((k) => (
-                <div key={k} className="bg-white/60 rounded-2xl p-6 border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-center min-h-[180px]">
-                  <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-400">{I.users("w-5 h-5")}</div>
-                  <p className="mt-4 text-[13px] font-semibold text-slate-500">Espace réservé</p>
-                  <p className="mt-1 text-[12px] text-slate-400 max-w-[200px]">Vos vrais témoignages clients s'afficheront ici. Ajoutez-les depuis l'administration.</p>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        )}
+        ) : null}
       </div>
     </section>
   );
