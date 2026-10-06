@@ -177,8 +177,8 @@ export function Hero({ content }: { content: SiteContent }) {
                 <span className="text-[26px] lg:text-[30px] font-extrabold tracking-[-0.02em] text-[#0A2A6B]">{h.price}</span>
               </div>
 
-              {/* CTA dans la carte — PC uniquement */}
-              <div className="mt-6 hidden lg:flex flex-row gap-3">
+              {/* CTA — boutons premium */}
+              <div className="mt-6 flex flex-col sm:flex-row gap-3">
                 {/* Bouton principal — WhatsApp */}
                 <a
                   href={waLink()}
@@ -217,42 +217,6 @@ export function Hero({ content }: { content: SiteContent }) {
                 </a>
               </div>
 
-            </div>
-
-            {/* CTA sous la carte — mobile uniquement */}
-            <div className="lg:hidden mt-4 flex flex-col gap-3">
-              <a
-                href={waLink()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative w-full inline-flex items-center justify-between gap-3 bg-gradient-to-r from-[#5CC63D] to-[#4CAF50] active:from-[#4CAF50] active:to-[#3F9A38] text-white font-bold px-4 py-4 rounded-2xl transition-all duration-300 shadow-[0_12px_32px_-10px_rgba(92,198,61,0.75)]"
-              >
-                <span className="flex items-center gap-3 min-w-0">
-                  <span className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0 ring-2 ring-white/30">
-                    {I.wa("w-5 h-5")}
-                  </span>
-                  <span className="text-[13.5px] leading-tight">{h.ctaPrimary}</span>
-                </span>
-                <span className="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center shrink-0">
-                  {I.arrow("w-4 h-4")}
-                </span>
-              </a>
-              <a
-                href="#avant-apres"
-                className="group w-full inline-flex items-center justify-between gap-3 bg-white active:bg-slate-50 text-slate-900 font-bold px-4 py-4 rounded-2xl transition-all duration-300 ring-1 ring-slate-200 shadow-[0_4px_16px_-6px_rgba(15,23,42,0.08)]"
-              >
-                <span className="flex items-center gap-3 min-w-0">
-                  <span className="relative w-10 h-10 rounded-full bg-gradient-to-br from-[#1E9BE0] to-[#0A2A6B] text-white flex items-center justify-center shrink-0 shadow-md">
-                    <svg viewBox="0 0 24 24" className="w-4 h-4 ml-0.5" fill="currentColor">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </span>
-                  <span className="text-[13.5px] leading-tight">{h.ctaSecondary}</span>
-                </span>
-                <span className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center shrink-0">
-                  {I.arrow("w-4 h-4 text-slate-600")}
-                </span>
-              </a>
             </div>
         </div>
       </div>
