@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useSite } from "@/lib/store";
-import { AdminReset } from "@/components/kdlebron13/reset";
+import { AdminReset } from "@/components/admin/reset";
 
 export default function AdminResetPage() {
   const router = useRouter();

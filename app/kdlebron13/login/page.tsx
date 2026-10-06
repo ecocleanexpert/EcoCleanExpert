@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSite } from "@/lib/store";
-import { AdminLogin } from "@/components/kdlebron13/login";
+import { AdminLogin } from "@/components/admin/login";
 import { getSupabase, isSupabaseConfigured } from "@/lib/supabase/client";
 
 export default function AdminLoginPage() {
