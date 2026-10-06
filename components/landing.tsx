@@ -7,18 +7,19 @@ import { Hero } from "@/components/hero";
 import type { QuoteRequest } from "@/lib/types";
 import type { SiteContent } from "@/lib/defaultContent";
 
-const Services = dynamic(() => import("@/components/sections-a").then((m) => m.Services));
-const BeforeAfter = dynamic(() => import("@/components/sections-a").then((m) => m.BeforeAfter));
-const HowItWorks = dynamic(() => import("@/components/sections-a").then((m) => m.HowItWorks));
-const WhyUs = dynamic(() => import("@/components/sections-a").then((m) => m.WhyUs));
-const ParentCompanySection = dynamic(() => import("@/components/sections-a").then((m) => m.ParentCompanySection));
-const StatsSection = dynamic(() => import("@/components/sections-b").then((m) => m.StatsSection));
-const FAQSection = dynamic(() => import("@/components/sections-b").then((m) => m.FAQSection));
-const ContactFormSection = dynamic(() => import("@/components/contact").then((m) => m.ContactFormSection));
-const Pricing = dynamic(() => import("@/components/sections-c").then((m) => m.Pricing));
-const Testimonials = dynamic(() => import("@/components/sections-c").then((m) => m.Testimonials));
-const Zones = dynamic(() => import("@/components/sections-c").then((m) => m.Zones));
-const FinalCTA = dynamic(() => import("@/components/sections-c").then((m) => m.FinalCTA));
+const loadingBox = () => <div className="min-h-[260px] bg-gradient-to-b from-white to-slate-50" />;
+const Services = dynamic(() => import("@/components/sections-a").then((m) => m.Services), { loading: loadingBox });
+const BeforeAfter = dynamic(() => import("@/components/sections-a").then((m) => m.BeforeAfter), { loading: loadingBox });
+const HowItWorks = dynamic(() => import("@/components/sections-a").then((m) => m.HowItWorks), { loading: loadingBox });
+const WhyUs = dynamic(() => import("@/components/sections-a").then((m) => m.WhyUs), { loading: loadingBox });
+const ParentCompanySection = dynamic(() => import("@/components/sections-a").then((m) => m.ParentCompanySection), { loading: loadingBox });
+const StatsSection = dynamic(() => import("@/components/sections-b").then((m) => m.StatsSection), { loading: loadingBox });
+const FAQSection = dynamic(() => import("@/components/sections-b").then((m) => m.FAQSection), { loading: loadingBox });
+const ContactFormSection = dynamic(() => import("@/components/contact").then((m) => m.ContactFormSection), { loading: loadingBox });
+const Pricing = dynamic(() => import("@/components/sections-c").then((m) => m.Pricing), { loading: loadingBox });
+const Testimonials = dynamic(() => import("@/components/sections-c").then((m) => m.Testimonials), { loading: loadingBox });
+const Zones = dynamic(() => import("@/components/sections-c").then((m) => m.Zones), { loading: loadingBox });
+const FinalCTA = dynamic(() => import("@/components/sections-c").then((m) => m.FinalCTA), { loading: loadingBox });
 
 function LazySection({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -37,7 +38,11 @@ function LazySection({ children }: { children: ReactNode }) {
     io.observe(el);
     return () => io.disconnect();
   }, [show]);
-  return <div ref={ref} className="min-h-[420px]">{show ? children : null}</div>;
+  return (
+    <div ref={ref} className={show ? "" : "min-h-[96px]"}>
+      {show ? children : <div className="h-[96px] bg-gradient-to-b from-white to-slate-50" />}
+    </div>
+  );
 }
 
 export function Landing({ content, onAdmin, onNewRequest, onNavigate }: { content: SiteContent; onAdmin: () => void; onNewRequest: (r: QuoteRequest) => void; onNavigate: (t?: string) => void }) {
