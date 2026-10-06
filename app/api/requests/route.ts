@@ -47,6 +47,21 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // Limites de taille anti-abus
+  const tooLong =
+    (body.name || "").length > 120 ||
+    (body.phone || "").length > 30 ||
+    (body.email || "").length > 160 ||
+    (body.service || "").length > 120 ||
+    (body.commune || "").length > 80 ||
+    (body.message || "").length > 2000;
+  if (tooLong) {
+    return NextResponse.json({ error: "Champs trop longs" }, { status: 400 });
+  }
+  if (body.email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(body.email.trim())) {
+    return NextResponse.json({ error: "E-mail invalide" }, { status: 400 });
+  }
+
   const request: QuoteRequest = {
     id: typeof body.id === "number" ? body.id : Date.now(),
     name: body.name.trim(),

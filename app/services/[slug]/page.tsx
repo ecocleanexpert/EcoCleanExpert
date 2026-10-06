@@ -20,28 +20,30 @@ export function generateStaticParams() {
     .map((s) => ({ slug: slugify(s.title) }));
 }
 
-export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
+  const { slug } = await params;
   const content = await getSiteContent();
-  const service = findService(params.slug, content.services);
+  const service = findService(slug, content.services);
   if (!service) return { title: "Service — Eco Clean Expert" };
   const title = `Nettoyage ${service.title} à Abidjan — Eco Clean Expert`;
   const description = `${service.desc} ${service.price}. Intervention à domicile à Abidjan.`;
   return {
     title,
     description,
-    alternates: { canonical: `/services/${params.slug}` },
+    alternates: { canonical: `/services/${slug}` },
     openGraph: {
       title,
       description,
-      url: `${SITE_URL}/services/${params.slug}`,
+      url: `${SITE_URL}/services/${slug}`,
       images: service.image ? [`/${service.image.replace(/^\//, "")}`] : undefined,
     },
   };
 }
 
-export default async function ServicePage({ params }: { params: Params }) {
+export default async function ServicePage({ params }: { params: Promise<Params> }) {
+  const { slug } = await params;
   const content = await getSiteContent();
-  const service = findService(params.slug, content.services);
+  const service = findService(slug, content.services);
   if (!service || !service.active) notFound();
 
   const img = service.image?.replace(/^\//, "") || "images/hero.webp";
