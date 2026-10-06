@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { I } from "@/lib/icons";
 import { waLink } from "@/lib/constants";
-import { PwaInstall } from "@/components/install";
 import type { SiteContent } from "@/lib/defaultContent";
 
 export function LogoBlock({ content, variant = "header" }: { content: SiteContent; variant?: "header" | "footer" | "sidebar" | "login" }) {
@@ -120,7 +119,6 @@ export function Header({ content, onAdmin }: { content: SiteContent; onAdmin: ()
   >
     {I.wa("w-4 h-4")} Devis WhatsApp
   </a>
-  <PwaInstall />
 </div>
 <div className="flex lg:hidden items-center gap-2">
   <a
@@ -146,7 +144,6 @@ export function Header({ content, onAdmin }: { content: SiteContent; onAdmin: ()
             {links.map((l) => (<a key={l.href} href={l.href} onClick={(e) => goto(e, l.href)} className="py-3 text-[15px] font-medium text-slate-700 border-b border-slate-50 last:border-0">{l.label}</a>))}
           </nav>
           <a href={waLink()} target="_blank" rel="noopener noreferrer" className="mt-3 w-full inline-flex items-center justify-center gap-2 bg-[#5CC63D] text-white font-semibold py-3.5 rounded-full">{I.wa("w-5 h-5")} Demander un devis WhatsApp</a>
-          <div className="mt-3 flex justify-center"><PwaInstall /></div>
         </div>
       </div>
     </header>

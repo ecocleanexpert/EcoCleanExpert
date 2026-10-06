@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import dynamic from "next/dynamic";
+import { PwaInstall } from "@/components/install";
 import { Header, MobileBar, Footer } from "@/components/chrome";
 import { Hero } from "@/components/hero";
 import type { QuoteRequest } from "@/lib/types";
@@ -67,6 +68,7 @@ export function Landing({ content, onAdmin, onNewRequest, onNavigate }: { conten
       </main>
       <Footer content={content} onAdmin={onAdmin} onNavigate={onNavigate} />
       <MobileBar content={content} />
+      <PwaInstall />
     </div>
   );
 }
