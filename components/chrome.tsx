@@ -14,10 +14,14 @@ export function LogoBlock({ content, variant = "header" }: { content: SiteConten
   const wrapSize = variant === "footer" ? "w-16 h-16 p-2 rounded-xl" : variant === "sidebar" ? "w-11 h-11 p-1 rounded-lg" : "";
   const src = content.brand.logo;
   const logoSrc = /^(https?:|data:|\/)/.test(src) ? src : `/${src}`;
+  const webpSrc = /\.(png|jpe?g)$/i.test(logoSrc) ? logoSrc.replace(/\.(png|jpe?g)$/i, ".webp") : null;
   return (
     <div className="flex items-center gap-2.5">
       <div className={`${wrapCls} ${wrapSize}`}>
-        <img src={logoSrc} alt="Logo Eco Clean Expert" width={48} height={48} className={`${logo} w-auto object-contain`} loading="eager" fetchPriority="high" decoding="sync" />
+        <picture>
+          {webpSrc && <source srcSet={webpSrc} type="image/webp" />}
+          <img src={logoSrc} alt="Logo Eco Clean Expert" width={48} height={48} className={`${logo} w-auto object-contain`} loading="eager" fetchPriority="high" decoding="sync" />
+        </picture>
       </div>
       <div className="leading-[1.05]">
         <div className={`font-extrabold tracking-[-0.02em] ${nameC}`}>{content.brand.name}</div>

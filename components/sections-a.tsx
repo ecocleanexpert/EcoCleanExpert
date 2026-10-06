@@ -93,6 +93,11 @@ export function Compare({ before, after, title }: { before: string; after: strin
 }
 
 export function BeforeAfter({ content }: { content: SiteContent }) {
+  function thumbOf(url: string) {
+    if (url.startsWith("data:") || url.startsWith("http")) return url;
+    const p = url.startsWith("/") ? url : `/${url}`;
+    return p.replace(/\.(jpe?g|png|webp)$/i, "-thumb.webp");
+  }
   const items = content.beforeAfter.filter((b) => b.active);
   const [idx, setIdx] = useState(0);
   const current = items[idx];
@@ -126,7 +131,7 @@ export function BeforeAfter({ content }: { content: SiteContent }) {
               <div className="mt-8 flex gap-3">
                 {items.map((it, i) => (
                   <button key={it.id} onClick={() => setIdx(i)} aria-label={`Voir ${it.title}`} className={`relative w-20 h-16 rounded-xl overflow-hidden ring-2 transition-all duration-300 ${i === idx ? "ring-[#5CC63D] scale-105" : "ring-white/15 hover:ring-white/40"}`}>
-                    <img src={it.before.startsWith("/") || it.before.startsWith("http") || it.before.startsWith("data:") ? it.before : `/${it.before}`} alt={it.title} loading="eager" decoding="async" className="w-full h-full object-cover" />
+                    <img src={thumbOf(it.before)} alt={it.title} width="280" height="372" loading="eager" decoding="async" className="w-full h-full object-cover" />
                     {i !== idx && <div className="absolute inset-0 bg-[#0A2A6B]/50 hover:bg-[#0A2A6B]/20 transition-colors" />}
                   </button>
                 ))}

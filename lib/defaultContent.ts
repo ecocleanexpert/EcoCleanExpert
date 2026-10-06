@@ -1,5 +1,5 @@
 export const DEFAULT_CONTENT = {
-  brand: { name: "Eco Clean Expert", tagline: "Expert du nettoyage express", phone: "+225 01 42 08 97 76", city: "Abidjan, Côte d'Ivoire", hours: "7j/7 — 8h à 20h", logo: "images/logo.png" },
+  brand: { name: "Eco Clean Expert", tagline: "Expert du nettoyage express", phone: "+225 01 42 08 97 76", city: "Abidjan, Côte d'Ivoire", hours: "7j/7 — 8h à 20h", logo: "images/logo.webp" },
   hero: {
     label: "Eco Clean Expert", title1: "Du sale", title2: "au propre.",
     subtitle: "Le nettoyage professionnel qui redonne vie à vos espaces.",
