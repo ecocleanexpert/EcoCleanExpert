@@ -1,4 +1,4 @@
-const CACHE = "ece-v2";
+const CACHE = "ece-v3";
 const ASSETS = ["/images/logo.webp", "/images/hero-mobile.webp", "/images/icon-192.png"];
 
 self.addEventListener("install", (e) => {
