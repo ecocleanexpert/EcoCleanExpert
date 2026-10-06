@@ -120,22 +120,7 @@ export function Header({ content, onAdmin }: { content: SiteContent; onAdmin: ()
     {I.wa("w-4 h-4")} Devis WhatsApp
   </a>
 </div>
-<div className="flex lg:hidden items-center gap-2">
-  <a
-    href={`tel:${content.contact.phone.replace(/\s/g, "")}`}
-    aria-label="Appeler"
-    className="w-10 h-10 rounded-full bg-white border border-slate-200 text-slate-700 flex items-center justify-center shadow-sm"
-  >
-    {I.phone("w-5 h-5")}
-  </a>
-  <button
-    onClick={() => setOpen((v) => !v)}
-    aria-label="Menu"
-    className="w-10 h-10 rounded-full border border-slate-200 text-slate-700 flex items-center justify-center"
-  >
-    {open ? I.x("w-5 h-5") : I.menu("w-5 h-5")}
-  </button>
-</div>
+<div className="flex lg:hidden items-center gap-2" />
         </div>
       </div>
       <div className={`lg:hidden overflow-hidden transition-[max-height,opacity] duration-300 ${open ? "max-h-[420px] opacity-100" : "max-h-0 opacity-0"}`}>
