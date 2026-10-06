@@ -56,6 +56,15 @@ export function Testimonials({ content }: { content: SiteContent }) {
               <div className="text-[12px] font-bold tracking-[0.18em] text-[#1E9BE0] uppercase">Avis clients</div>
               <h2 className="mt-3 text-[30px] sm:text-[38px] lg:text-[42px] font-extrabold tracking-[-0.02em] text-slate-900 leading-[1.08]">Ils nous font confiance.</h2>
             </div>
+            <a
+              href="https://g.page/r/CWNU_vC2kempEAI/review"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-[13px] font-bold text-slate-800 ring-1 ring-slate-900/10 shadow-sm hover:ring-[#1E9BE0]/40 hover:text-[#1173A9] transition-all"
+            >
+              <span className="text-[#F59E0B]">{I.star("w-4 h-4")}</span>
+              Laisser un avis sur Google
+            </a>
           </div>
         </Reveal>
         {has ? (
