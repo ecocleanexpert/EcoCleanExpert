@@ -78,10 +78,17 @@ export function MobileBar({ content }: { content: SiteContent }) {
 export function Header({ content, onAdmin }: { content: SiteContent; onAdmin: () => void }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [progress, setProgress] = useState(0);
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 12);
+      const doc = document.documentElement;
+      const max = doc.scrollHeight - doc.clientHeight;
+      setProgress(max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0);
+    };
     onScroll(); window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll);
+    return () => { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); };
   }, []);
   const links = [
   { href: "#accueil", label: "Accueil" }, { href: "#services", label: "Services" },
@@ -91,6 +98,7 @@ export function Header({ content, onAdmin }: { content: SiteContent; onAdmin: ()
   const goto = (e: { preventDefault: () => void }, href: string) => { e.preventDefault(); setOpen(false); const el = document.querySelector(href); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); };
   return (
     <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/95 backdrop-blur-md shadow-[0_1px_0_rgba(15,23,42,0.06)]" : "bg-white/80 backdrop-blur-sm"}`}>
+      <div className="absolute top-0 left-0 h-[3px] bg-gradient-to-r from-[#5CC63D] to-[#1E9BE0] transition-[width] duration-150 ease-out rounded-r-full" style={{ width: `${progress}%` }} />
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
         <div className="h-16 lg:h-20 flex items-center justify-between gap-4">
           <a href="#accueil" onClick={(e) => goto(e, "#accueil")} className="shrink-0"><LogoBlock content={content} variant="header" /></a>
