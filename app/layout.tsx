@@ -9,6 +9,8 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ecocleanexpert.sit
 
 const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800", "900"] });
 
+export const viewport = { themeColor: "#0A2A6B" };
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -17,7 +19,9 @@ export const metadata: Metadata = {
   },
   description:
     "Eco Clean Expert : nettoyage canapé, fauteuil, tapis, moquette et véhicules à Abidjan. Intervention à domicile. À partir de 15 000 F CFA.",
-  icons: { icon: "/images/logo.png", apple: "/images/logo.png" },
+  icons: { icon: "/images/icon-192.png", apple: "/images/icon-192.png" },
+  appleWebApp: { capable: true, title: "Eco Clean Expert", statusBarStyle: "default" },
+  applicationName: "Eco Clean Expert",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
