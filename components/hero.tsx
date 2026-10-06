@@ -106,10 +106,10 @@ export function Hero({ content }: { content: SiteContent }) {
   return (
     <section
       id="accueil"
-      className="relative w-full overflow-hidden min-h-[700px] flex flex-col lg:block"
+      className="relative w-full overflow-hidden min-h-[720px] lg:min-h-[700px] flex items-center"
     >
-      {/* Image de fond plein écran (desktop) */}
-      <div className="absolute inset-0 hidden lg:block">
+      {/* Image de fond plein écran */}
+      <div className="absolute inset-0">
         {/hero\.webp$/.test(h.image) ? (
           <img
             src={h.image.startsWith("/") || h.image.startsWith("http") ? h.image : `/${h.image}`}
@@ -130,38 +130,14 @@ export function Hero({ content }: { content: SiteContent }) {
             className="w-full h-full object-cover object-center"
           />
         )}
-      </div>
-
-      {/* Image en bandeau — mobile uniquement : le canapé reste visible */}
-      <div className="lg:hidden relative w-full h-[42vh] min-h-[260px] mt-16">
-        {/hero\.webp$/.test(h.image) ? (
-          <img
-            src={h.image.startsWith("/") || h.image.startsWith("http") ? h.image : `/${h.image}`}
-            srcSet={`${(h.image.startsWith("/") ? h.image : `/${h.image}`).replace(/hero\.webp$/, "hero-mobile.webp")} 640w, ${h.image.startsWith("/") ? h.image : `/${h.image}`} 1200w`}
-            sizes="100vw"
-            alt="Nettoyage professionnel Eco Clean Expert à Abidjan"
-            loading="eager"
-            fetchPriority="high"
-            decoding="async"
-            className="w-full h-full object-cover object-center"
-          />
-        ) : (
-          <Img
-            src={h.image}
-            alt="Nettoyage professionnel Eco Clean Expert à Abidjan"
-            loading="eager"
-            fetchPriority="high"
-            className="w-full h-full object-cover object-center"
-          />
-        )}
-        {/* Dégradé de transition vers la carte */}
-        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent" />
+        {/* Voile léger pour lisibilité sur mobile */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white/30 via-white/10 to-transparent lg:hidden" />
       </div>
 
       {/* Contenu — panneau blanc transparent */}
-      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pb-10 -mt-10 lg:pt-24 lg:pb-16 lg:mt-0">
+      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pt-28 pb-14 lg:pt-24 lg:pb-16">
         <div className="lg:max-w-[580px]">
-            <div className="bg-white/85 sm:bg-white/75 lg:bg-white/60 backdrop-blur-xl rounded-3xl p-5 sm:p-8 shadow-[0_24px_70px_-24px_rgba(15,23,42,0.35)] ring-1 ring-white/40">
+            <div className="bg-white/60 sm:bg-white/55 lg:bg-white/60 backdrop-blur-xl rounded-3xl p-5 sm:p-8 shadow-[0_24px_70px_-24px_rgba(15,23,42,0.35)] ring-1 ring-white/40">
 
               {/* Label */}
               <div className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.18em] text-[#1E9BE0] uppercase">
