@@ -11,7 +11,7 @@ export function Services({ content }: { content: SiteContent }) {
   const iconMap: Record<string, (c?: string) => JSX.Element> = { sofa: I.sofa, chair: I.chair, carpet: I.carpet, car: I.car, building: I.building, hammer: I.hammer };
   const items = content.services.filter((s) => s.active).sort((a, b) => a.order - b.order);
   return (
-    <section id="services" className="py-10 lg:py-14 bg-slate-50/70">
+    <section id="services" className="py-8 lg:py-12 bg-slate-50/70">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
         <Reveal>
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5 mb-10 lg:mb-14">
@@ -117,7 +117,7 @@ export function BeforeAfter({ content }: { content: SiteContent }) {
   }, [items]);
   if (!current) return null;
   return (
-    <section id="avant-apres" className="py-16 lg:py-24 bg-[#0A2A6B] text-white relative overflow-hidden">
+    <section id="avant-apres" className="py-10 lg:py-16 bg-[#0A2A6B] text-white relative overflow-hidden">
       <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 20% 20%, #fff 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
       <div className="max-w-7xl mx-auto px-5 lg:px-8 relative">
         <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-10 lg:gap-14 items-center">
@@ -156,7 +156,7 @@ export function BeforeAfter({ content }: { content: SiteContent }) {
 ============================================================ */
 export function HowItWorks({ content }: { content: SiteContent }) {
   return (
-    <section id="process" className="py-16 lg:py-24">
+    <section id="process" className="py-10 lg:py-16">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
         <Reveal><div className="text-center max-w-2xl mx-auto"><div className="text-[12px] font-bold tracking-[0.18em] text-[#1E9BE0] uppercase">Comment ça marche ?</div><h2 className="mt-3 text-[30px] sm:text-[38px] lg:text-[42px] font-extrabold tracking-[-0.02em] text-slate-900 leading-[1.08]">Un service simple et rapide.</h2></div></Reveal>
         <div className="mt-12 lg:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
@@ -185,7 +185,7 @@ export function HowItWorks({ content }: { content: SiteContent }) {
 export function WhyUs({ content }: { content: SiteContent }) {
   const iconMap: Record<string, (c?: string) => JSX.Element> = { users: I.users, shield: I.shield, spark: I.spark, home: I.home, pin: I.pin };
   return (
-    <section id="pourquoi" className="py-16 lg:py-24 bg-slate-50/70">
+    <section id="pourquoi" className="py-10 lg:py-16 bg-slate-50/70">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
         <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-center">
           <Reveal>
@@ -225,7 +225,7 @@ export function ParentCompanySection({ content }: { content: SiteContent }) {
   if (!pc.name || pc.showInAbout === false) return null;
 
   return (
-    <section id="groupe" className="py-16 lg:py-24 bg-gradient-to-br from-[#071B2C] to-[#0A2A6B] text-white relative overflow-hidden">
+    <section id="groupe" className="py-10 lg:py-16 bg-gradient-to-br from-[#071B2C] to-[#0A2A6B] text-white relative overflow-hidden">
       <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 30% 40%, #fff 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
       <div className="max-w-7xl mx-auto px-5 lg:px-8 relative">
         <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-center">

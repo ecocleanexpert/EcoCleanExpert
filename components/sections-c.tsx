@@ -10,7 +10,7 @@ export function Pricing({ content }: { content: SiteContent }) {
   const items = content.services.filter((s) => s.active).sort((a, b) => a.order - b.order);
   const iconMap: Record<string, (c?: string) => JSX.Element> = { sofa: I.sofa, chair: I.chair, carpet: I.carpet, car: I.car, building: I.building, hammer: I.hammer };
   return (
-    <section id="tarifs" className="py-16 lg:py-24">
+    <section id="tarifs" className="py-10 lg:py-16">
       <div className="max-w-5xl mx-auto px-5 lg:px-8">
         <Reveal>
           <div className="text-center">
@@ -59,7 +59,7 @@ export function Testimonials({ content }: { content: SiteContent }) {
   const has = grevs.length > 0 || (content.testimonials && content.testimonials.length > 0);
   if (content.showTestimonials !== true) return null;
   return (
-    <section id="avis" className="py-16 lg:py-24 bg-slate-50/70">
+    <section id="avis" className="py-10 lg:py-16 bg-slate-50/70">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
         <Reveal>
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
@@ -139,7 +139,7 @@ export function Testimonials({ content }: { content: SiteContent }) {
 export function Zones({ content }: { content: SiteContent }) {
   const zones = content.zones.filter((z) => z.active);
   return (
-    <section id="zones" className="py-16 lg:py-24">
+    <section id="zones" className="py-10 lg:py-16">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
           <div>

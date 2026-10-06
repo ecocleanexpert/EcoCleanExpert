@@ -18,7 +18,7 @@ export function StatsSection({ content }: { content: SiteContent }) {
   };
 
   return (
-    <section id="chiffres" className="py-16 lg:py-24">
+    <section id="chiffres" className="py-10 lg:py-16">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
         <Reveal>
           <div className="text-center max-w-2xl mx-auto mb-12 lg:mb-16">
@@ -108,7 +108,7 @@ export function FAQSection({ content }: { content: SiteContent }) {
   if (items.length === 0) return null;
 
   return (
-    <section id="faq" className="py-16 lg:py-24 bg-slate-50/70">
+    <section id="faq" className="py-10 lg:py-16 bg-slate-50/70">
       <div className="max-w-4xl mx-auto px-5 lg:px-8">
         <Reveal>
           <div className="text-center max-w-2xl mx-auto mb-10 lg:mb-14">

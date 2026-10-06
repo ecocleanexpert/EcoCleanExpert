@@ -159,7 +159,7 @@ export function Footer({ content, onAdmin, onNavigate }: { content: SiteContent;
   const services = content.services.filter((s) => s.active).sort((a, b) => a.order - b.order);
   return (
     <footer className="bg-[#071B2C] text-white/70">
-      <div className="max-w-7xl mx-auto px-5 lg:px-8 py-14">
+      <div className="max-w-7xl mx-auto px-5 lg:px-8 py-10">
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
             <LogoBlock content={content} variant="footer" />

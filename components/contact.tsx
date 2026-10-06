@@ -123,7 +123,7 @@ export function ContactFormSection({ content, onNewRequest }: { content: SiteCon
 
   if (submitted) {
     return (
-      <section id="devis" className="py-16 lg:py-24">
+      <section id="devis" className="py-8 lg:py-12">
         <div className="max-w-2xl mx-auto px-5 lg:px-8">
           <Reveal>
             <div className="bg-white rounded-3xl ring-1 ring-slate-900/5 shadow-[0_24px_60px_-30px_rgba(15,23,42,0.3)] p-8 lg:p-12 text-center">
@@ -159,7 +159,7 @@ export function ContactFormSection({ content, onNewRequest }: { content: SiteCon
   const inputErr = "border-red-300 bg-red-50/30 focus:border-red-400 focus:ring-2 focus:ring-red-100";
 
   return (
-    <section id="devis" className="py-16 lg:py-24">
+    <section id="devis" className="py-8 lg:py-12">
       <div className="max-w-5xl mx-auto px-5 lg:px-8">
         <Reveal>
           <div className="text-center max-w-2xl mx-auto mb-10 lg:mb-14">

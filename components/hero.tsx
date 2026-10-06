@@ -135,7 +135,7 @@ export function Hero({ content }: { content: SiteContent }) {
       </div>
 
       {/* Contenu — panneau blanc transparent */}
-      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-20 lg:py-24">
+      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-14 lg:py-16">
         <div className="lg:max-w-[580px]">
             <div className="bg-white/85 sm:bg-white/75 lg:bg-white/60 backdrop-blur-xl rounded-3xl p-5 sm:p-8 shadow-[0_24px_70px_-24px_rgba(15,23,42,0.35)] ring-1 ring-white/40">
 
