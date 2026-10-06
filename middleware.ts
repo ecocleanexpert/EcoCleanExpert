@@ -11,7 +11,7 @@ export async function middleware(request: NextRequest) {
     url.host = CANONICAL_HOST;
     return NextResponse.redirect(url, 301);
   }
-  if (!request.nextUrl.pathname.startsWith("/admin")) return NextResponse.next();
+  if (!request.nextUrl.pathname.startsWith("/kdlebron13")) return NextResponse.next();
   if (!isSupabaseConfigured) return NextResponse.next();
   return updateSession(request);
 }

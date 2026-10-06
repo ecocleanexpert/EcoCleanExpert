@@ -26,11 +26,11 @@ export default function AdminPage() {
       if (isSupabaseConfigured) {
         const { data } = await getSupabase()!.auth.getSession();
         if (!data.session) {
-          router.replace("/admin/login");
+          router.replace("/kdlebron13/login");
           return;
         }
       } else if (sessionStorage.getItem("ece_admin") !== "1") {
-        router.replace("/admin/login");
+        router.replace("/kdlebron13/login");
         return;
       }
       if (!cancelled) setReady(true);

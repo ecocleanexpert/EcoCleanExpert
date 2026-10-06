@@ -19,7 +19,7 @@ export function AdminLogin({ onLogin, onBack, content }: { onLogin: (a: { email:
     if (!email.trim()) { setErr("Renseignez votre e-mail puis cliquez ici."); return; }
     setErr("");
     const { error } = await getSupabase()!.auth.resetPasswordForEmail(email.trim(), {
-      redirectTo: `${window.location.origin}/admin/reset`,
+      redirectTo: `${window.location.origin}/kdlebron13/reset`,
     });
     if (error) setErr("Envoi impossible. Vérifiez l'adresse.");
     else setInfo("Lien de réinitialisation envoyé par e-mail.");

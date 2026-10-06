@@ -4,7 +4,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ecocleanexpert.sit
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: [{ userAgent: "*", allow: "/", disallow: ["/admin", "/admin/"] }],
+    rules: [{ userAgent: "*", allow: "/", disallow: ["/kdlebron13", "/kdlebron13/"] }],
     sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }

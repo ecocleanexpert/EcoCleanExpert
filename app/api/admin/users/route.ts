@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
     // Invitation par e-mail : le destinataire choisit son mot de passe
     ({ error: createErr } = await sb.auth.admin.inviteUserByEmail(
       email.trim().toLowerCase(),
-      { redirectTo: `${req.nextUrl.origin}/admin/reset` }
+      { redirectTo: `${req.nextUrl.origin}/kdlebron13/reset` }
     ));
   }
   if (createErr) return NextResponse.json({ error: createErr.message }, { status: 400 });

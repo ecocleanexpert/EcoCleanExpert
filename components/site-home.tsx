@@ -28,7 +28,7 @@ export function SiteHome() {
     <>
       <Landing
         content={content}
-        onAdmin={() => router.push("/admin")}
+        onAdmin={() => router.push("/kdlebron13")}
         onNewRequest={addRequest}
         onNavigate={navigate}
       />
