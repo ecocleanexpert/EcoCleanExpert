@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { DEFAULT_CONTENT } from "@/lib/defaultContent";
 import { slugify } from "@/lib/slugs";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://eco-clean-expert.vercel.app";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ecocleanexpert.site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

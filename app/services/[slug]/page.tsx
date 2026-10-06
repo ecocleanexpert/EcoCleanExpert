@@ -6,7 +6,7 @@ import { getSiteContent } from "@/lib/supabase/server";
 import { slugify } from "@/lib/slugs";
 import { waLink } from "@/lib/constants";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://eco-clean-expert.vercel.app";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ecocleanexpert.site";
 
 type Params = { slug: string };
 
