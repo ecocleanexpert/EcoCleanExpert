@@ -31,6 +31,9 @@ export async function getMyRole(): Promise<AdminRole> {
   const sb = getSupabase()!;
   const { data: { user } } = await sb.auth.getUser();
   if (!user?.email) return "editor";
+  // RPC security definer : indépendant de la RLS (lecture toujours fiable)
+  const { data: rpcRole } = await sb.rpc("my_role");
+  if (rpcRole) return rpcRole as AdminRole;
   const { data } = await sb
     .from("admin_users")
     .select("role")
