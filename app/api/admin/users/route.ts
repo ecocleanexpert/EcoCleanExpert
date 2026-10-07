@@ -63,11 +63,42 @@ export async function POST(req: NextRequest) {
       email_confirm: true,
     }));
   } else {
-    // Invitation par e-mail : le destinataire choisit son mot de passe
-    ({ error: createErr } = await sb.auth.admin.inviteUserByEmail(
-      email.trim().toLowerCase(),
-      { redirectTo: `${req.nextUrl.origin}/kdlebron13/reset` }
-    ));
+    // Invitation par e-mail via Resend : generateLink crée le compte
+    // et fournit le lien d'activation sans passer par le SMTP Supabase
+    const { data: linkData, error: linkErr } = await sb.auth.admin.generateLink({
+      type: "invite",
+      email: email.trim().toLowerCase(),
+      options: { redirectTo: `${req.nextUrl.origin}/kdlebron13/reset` },
+    });
+    createErr = linkErr;
+    if (!createErr) {
+      const actionLink = linkData?.properties?.action_link;
+      const resendKey = process.env.RESEND_API_KEY;
+      if (actionLink && resendKey) {
+        const res = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${resendKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            from: "Eco Clean Expert <noreply@ecocleanexpert.site>",
+            to: [email.trim().toLowerCase()],
+            subject: "Invitation — Administration Eco Clean Expert",
+            html: `
+              <div style="font-family:Arial,sans-serif;max-width:480px;margin:auto">
+                <h2 style="color:#0A2A6B">Bienvenue sur Eco Clean Expert</h2>
+                <p>Vous avez été invité(e) à administrer le site <strong>ecocleanexpert.site</strong>.</p>
+                <p><a href="${actionLink}" style="display:inline-block;background:#2E7D22;color:#fff;padding:12px 24px;border-radius:10px;text-decoration:none;font-weight:bold">Activer mon compte</a></p>
+                <p style="color:#666;font-size:13px">Ce lien vous permet de définir votre mot de passe. Il expire après 24&nbsp;h.</p>
+              </div>`,
+          }),
+        });
+        if (!res.ok) {
+          console.error("Resend invite:", res.status, await res.text());
+        }
+      }
+    }
   }
   if (createErr) return NextResponse.json({ error: createErr.message }, { status: 400 });
   const { error } = await sb.from("admin_users").upsert({ email: email.trim().toLowerCase(), role });
