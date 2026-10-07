@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServiceSupabase } from "@/lib/supabase/server";
-import { sendRequestNotification } from "@/lib/mail";
+import { sendRequestNotification, sendClientConfirmation } from "@/lib/mail";
 import type { QuoteRequest } from "@/lib/types";
 
 // Rate limiting persistant via Supabase : 5 demandes / 10 min / IP
@@ -90,5 +90,7 @@ export async function POST(req: NextRequest) {
   }
 
   const mail = await sendRequestNotification(request);
+  // Accusé de réception au client (silencieux si pas d'e-mail/pas de clé Resend)
+  await sendClientConfirmation(request);
   return NextResponse.json({ ok: true, emailed: mail.sent });
 }

@@ -5,6 +5,7 @@ import { I } from "@/lib/icons";
 import { waLink } from "@/lib/constants";
 import { Btn, Confirm } from "@/components/fields";
 import { logActivity } from "@/lib/activity";
+import { getSupabase } from "@/lib/supabase/client";
 import type { QuoteRequest, SetRequests, ToastFn } from "@/lib/types";
 
 export function AdminRequests({ requests, setRequests, onToast }: { requests: QuoteRequest[]; setRequests: SetRequests; onToast: ToastFn }) {
@@ -30,9 +31,28 @@ export function AdminRequests({ requests, setRequests, onToast }: { requests: Qu
   });
 
   const updateStatus = (id: any, status: any) => {
+    const target = requests.find((r) => r.id === id);
     setRequests((rs) => rs.map((r) => (r.id === id ? { ...r, status } : r)));
     logActivity("Statut mis à jour", status);
     onToast("Statut mis à jour");
+    // Notifie le client par e-mail (silencieux si pas d'e-mail)
+    if (target?.email) {
+      (async () => {
+        try {
+          const sb = getSupabase();
+          const { data } = (await sb?.auth.getSession()) || { data: null };
+          const token = data?.session?.access_token;
+          await fetch("/api/requests/status", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            },
+            body: JSON.stringify({ request: target, status }),
+          });
+        } catch {}
+      })();
+    }
   };
 
   const remove = (id: any) => {
